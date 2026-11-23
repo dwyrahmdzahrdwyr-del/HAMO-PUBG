@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>حمو ببجي | شحن شدات ببجي</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
+body{background:#0f0f1a;color:#fff}
+header{background:#1a1a2e;padding:15px 20px;display:flex;justify-content:space-between;align-items:center}
+.logo{font-size:22px;font-weight:900;color:#f5c518}
+.hero{background:linear-gradient(135deg,#f5c518,#ff6b00);color:#000;text-align:center;padding:25px 15px}
+.hero h1{font-size:26px}.hero p{margin:10px 0;font-weight:700}
+.badge{background:#000;color:#f5c518;padding:7px 14px;border-radius:20px;display:inline-block;font-size:14px;font-weight:900}
+.wrap{max-width:1000px;margin:auto;padding:20px 15px}
+.card{background:#1e1e32;border:2px solid #2a2a44;border-radius:18px;padding:16px;text-align:center;cursor:pointer}
+.card .uc{font-size:28px;font-weight:900}.card .bonus{color:#4ade80;font-size:13px}.card .price{font-size:24px;color:#f5c518;font-weight:900;margin:8px 0}
+.card button{width:100%;padding:12px;border:none;border-radius:12px;background:#f5c518;font-weight:900;font-size:16px;cursor:pointer}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+input{width:100%;padding:14px;border-radius:12px;border:1px solid #333;background:#1e1e32;color:#fff;margin:8px 0;font-size:16px}
+.pay{display:flex;gap:10px;flex-wrap:wrap}.pay div{background:#1e1e32;border:1px solid #333;padding:10px 14px;border-radius:12px;cursor:pointer}.pay div.sel{border-color:#f5c518;background:#2a2a1e}
+.paybox{background:#1e1e32;border:2px dashed #f5c518;padding:16px;border-radius:16px;text-align:center;margin-top:12px}
+.paybox b{font-size:26px;color:#f5c518}
+.total{background:#1e1e32;padding:16px;border-radius:16px;margin-top:15px;text-align:center}
+.total b{font-size:26px;color:#f5c518}
+.order{width:100%;padding:16px;background:#25D366;border:none;border-radius:14px;font-size:18px;font-weight:900;margin-top:12px;cursor:pointer}
+.back{padding:10px 18px;border:none;border-radius:10px;background:#333;color:#fff;font-weight:900;cursor:pointer;margin-bottom:12px}
+.promo{display:flex;gap:10px}.promo input{flex:1}.promo button{padding:14px 18px;border:none;border-radius:12px;background:#f5c518;font-weight:900;cursor:pointer}
+.detail-card{background:#1e1e32;border:2px solid #f5c518;border-radius:18px;padding:20px;text-align:center;margin-bottom:15px}
+.detail-card .uc{font-size:36px;font-weight:900}.detail-card .price{font-size:30px;color:#f5c518;font-weight:900}
+footer{text-align:center;opacity:.6;padding:20px;font-size:13px}
+</style>
+</head>
+<body>
+<header><div class="logo">👑 حمو ببجي HAMO PUBG</div><div>⚡ شحن فوري</div></header>
+<div class="hero"><div class="badge">⚡ أفضل أسعار شدات في مصر</div><h1>شحن شدات ببجي موبايل PUBG UC</h1><p>بالـ ID فقط • توصيل في 2 - 5 دقائق • فودافون كاش / انستا باي</p></div>
+
+<!-- صفحة الباقات -->
+<div class="wrap" id="homePage">
+<h2>1️⃣ اختار الباقة</h2>
+<p style="opacity:.7;margin:8px 0">دوس على أي باقة عشان تدخل على صفحتها</p>
+<div class="grid" id="packs"></div>
+</div>
+
+<!-- صفحة الباقة الواحدة -->
+<div class="wrap" id="detailPage" style="display:none">
+<button class="back" onclick="goHome()">⬅ رجوع لكل الباقات</button>
+<div class="detail-card">
+<div>🪙</div>
+<div class="uc" id="dUc">660 UC</div>
+<div id="dBonus" style="color:#4ade80">+ 60 مجانية</div>
+<div class="price" id="dPrice">574 ج</div>
+<p style="opacity:.7">شحن بالـ ID فقط - توصيل في 2 - 5 دقائق</p>
+</div>
+
+<h2>اكتب الـ ID</h2>
+<input id="playerId" placeholder="الـ Player ID - مثال: 5123456789">
+<input id="phone" placeholder="رقم الواتساب بتاعك">
+
+<h2>كود خصم (لو عندك)</h2>
+<div class="promo"><input id="promoInput" placeholder="اكتب كود الخصم - مثال: HAMO10"><button onclick="applyPromo()">تفعيل</button></div>
+<p id="promoMsg" style="color:#4ade80;margin-top:6px"></p>
+
+<h2>طريقة الدفع</h2>
+<div class="pay">
+<div class="sel" onclick="selPay(this,'فودافون كاش')">📱 فودافون كاش
