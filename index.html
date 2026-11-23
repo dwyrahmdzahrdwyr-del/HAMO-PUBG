@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>حمو ببجي | شحن شدات ببجي</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
+body{background:#0f0f1a;color:#fff}
+header{background:#1a1a2e;padding:15px 20px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:10}
+.logo{font-size:24px;font-weight:900;color:#f5c518}.logo span{color:#fff;font-size:14px}
+.hero{background:linear-gradient(135deg,#f5c518,#ff6b00);color:#000;text-align:center;padding:30px 15px}
+.hero h1{font-size:28px}.hero p{margin:10px 0;font-weight:700}
+.badge{background:#000;color:#f5c518;padding:7px 14px;border-radius:20px;display:inline-block;font-size:14px;font-weight:900}
+.wrap{max-width:1000px;margin:auto;padding:20px 15px}
+.card{background:#1e1e32;border:2px solid #2a2a44;border-radius:18px;padding:16px;text-align:center;position:relative}
+.card.active{border-color:#f5c518;background:#2a2a1e}
+.card .hot{position:absolute;top:-11px;left:50%;transform:translateX(-50%);background:#e63946;color:#fff;font-size:12px;padding:4px 10px;border-radius:20px;white-space:nowrap}
+.card .disc{position:absolute;top:10px;right:10px;background:#25D366;color:#fff;font-size:12px;padding:4px 8px;border-radius:10px;font-weight:900}
+.card .uc{font-size:28px;font-weight:900}.card .bonus{color:#4ade80;font-size:13px}.card .price{font-size:24px;color:#f5c518;font-weight:900;margin:8px 0}.card .old{color:#888;text-decoration:line-through;font-size:14px}
+.card button{width:100%;padding:12px;border:none;border-radius:12px;background:#f5c518;font-weight:900;font-size:16px;cursor:pointer}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(min-width:700px){.grid{grid-template-columns:repeat(3,1fr)}}
+input{width:100%;padding:14px;border-radius:12px;border:1px solid #333;background:#1e1e32;color:#fff;margin:8px 0;font-size:16px}
+.pay{display:flex;gap:10px;flex-wrap:wrap}.pay div{background:#1e1e32;border:1px solid #333;padding:10px 14px;border-radius:12px;cursor:pointer}.pay div.sel{border-color:#f5c518;background:#2a2a1e}
+.paybox{background:#1e1e32;border:2px dashed #f5c518;padding:16px;border-radius:16px;text-align:center;margin-top:12px}
+.paybox b{font-size:26px;color:#f5c518;letter-spacing:1px}
+.total{background:#1e1e32;padding:16px;border-radius:16px;margin-top:15px;text-align:center}
+.total b{font-size:26px;color:#f5c518}
+.order{width:100%;padding:16px;background:#25D366;border:none;border-radius:14px;font-size:18px;font-weight:900;margin-top:12px;cursor:pointer}
+.promo{display:flex;gap:10px}.promo input{flex:1}.promo button{padding:14px 18px;border:none;border-radius:12px;background:#f5c518;font-weight:900;cursor:pointer}
+footer{text-align:center;opacity:.6;padding:20px;font-size:13px}
+</style>
+</head>
+<body>
+<header><div class="logo">👑 حمو <span>ببجي HAMO PUBG</span></div><div>⚡ شحن فوري</div></header>
+<div class="hero"><div class="badge" id="heroBadge">⚡ أفضل أسعار شدات في مصر</div><h1>شحن شدات ببجي موبايل PUBG UC</h1><p>بالـ ID فقط • توصيل في 2 - 5 دقائق • فودافون كاش / انستا باي</p></div>
+<div class="wrap">
+<h2>1️⃣ اختار الباقة</h2>
+<div class="grid" id="packs"></div>
+<h2>2️⃣ كود خصم إضافي (لو عندك)</h2>
+<div class="promo"><input id="promoInput" placeholder="اكتب كود الخصم - مثال: HAMO10"><button onclick="applyPromo()">تفعيل</button></div>
+<p id="promoMsg" style="color:#4ade80;margin-top:6px"></p>
+<h2>3️⃣ بياناتك</h2>
+<input id="playerId" placeholder="الـ Player ID - مثال: 5123456789">
+<input id="phone" placeholder="رقم الواتساب بتاعك">
+<h2>4️⃣ طريقة الدفع</h2>
+<div class="pay" id="pays">
+<div class="sel" onclick="selPay(this,'فودافون كاش')">📱 فودافون كاش</div>
+<div onclick="selPay(this,'انستا باي')">🏦 انستا باي</div>
+<div onclick="selPay(this,'اورنج كاش')">🟠 اورنج كاش</div>
+<div onclick="selPay(this,'اتصالات كاش')">🟢 اتصالات كاش</div>
+</div>
+<div class="paybox">حوّل على رقم الدفع ده:<br><b>01208398454</b><br><span style="opacity:.8">باسم حمو ببجي - وبعد التحويل ابعت سكرين على واتساب</span><br><button onclick="copyNum()" style="
