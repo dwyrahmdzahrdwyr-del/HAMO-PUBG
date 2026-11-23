@@ -20,156 +20,42 @@
 input{width:100%;padding:11px;margin:8px 0;border-radius:9px;border:none;background:#fff;color:#000}
 .btn{padding:11px;border:none;border-radius:9px;font-weight:bold;width:100%;margin-top:8px}
 .modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.9);align-items:center;justify-content:center;padding:18px;z-index:99}
-.modal>div{background:#1c1c1c;padding:20px;border-radius:14px;width:100%;max-width:380px;text-align:center;max-height:90vh;overflow:auto}
-.paynum{background:#000;padding:12px;border-radius:9px;font-size:18px;font-weight:bold;color:#f5c518;margin:10px 0}
-.social{display:flex;gap:8px}.social button{flex:1;padding:10px;border-radius:9px;border:none;font-weight:bold}
+.modal>div{background:#1c1c1c;padding:20px;border-radius:14px;width:100%;max-width:380px;text-align:center;max-height:92vh;overflow:auto}
+.paynum{background:#000;padding:12px;border-radius:9px;font-size:20px;font-weight:bold;color:#f5c518;margin:10px 0}
+.social{display:flex;gap:8px;flex-wrap:wrap}.social button{flex:1;padding:10px;border-radius:9px;border:none;font-weight:bold;min-width:100px}
+.payOpt{background:#2a2a2a;border:2px solid #333;padding:10px;border-radius:10px;flex:1;min-width:100px;cursor:pointer;text-align:center;font-weight:bold}
+.payOpt.active{border-color:#f5c518;background:#3a2f00}
 </style>
 </head>
 <body>
-
-<div class="header">
-<div id="userInfo">👤 زائر - سجل دخول</div>
-<button onclick="openLogin()">دخول / تسجيل</button>
-</div>
-
+<div class="header"><div id="userInfo">👤 زائر - سجل دخول</div><button onclick="openLogin()">دخول / تسجيل</button></div>
 <div class="top"><h1>HAMO PUBG 🎮</h1><p style="color:#aaa;font-size:13px">شحن شدات - دفع فوري - عجلة حظ</p></div>
 
-<!-- حسابي -->
 <div id="profileBox" style="display:none;background:#1c1c1c;padding:14px;border-radius:12px;margin-top:10px">
-<h3>👤 حسابي</h3>
-<p style="font-size:13px;color:#ccc;margin:6px 0">ID ببجي المحفوظ: <b id="savedIdTxt" style="color:#f5c518">مش متسجل</b></p>
-<input id="pubgIdInput" placeholder="اكتب ID ببجي بتاعك - مثال: 5123456789">
-<button class="btn" style="background:#f5c518" onclick="savePubgId()">حفظ ID ببجي ✅</button>
-<p style="font-size:12px;color:#aaa;margin-top:6px">رصيد جوايزك: <b id="myPrize" style="color:#25D366">لا يوجد</b></p>
-</div>
+<h3>👤 حسابي</h3><p style="font-size:13px;color:#ccc;margin:6px 0">ID ببجي المحفوظ: <b id="savedIdTxt" style="color:#f5c518">مش متسجل</b></p>
+<input id="pubgIdInput" placeholder="اكتب ID ببجي بتاعك"><button class="btn" style="background:#f5c518" onclick="savePubgId()">حفظ ID ببجي ✅</button>
+<p style="font-size:12px;color:#aaa;margin-top:6px">رصيد جوايزك: <b id="myPrize" style="color:#25D366">لا يوجد</b></p></div>
 
-<!-- العجلة -->
-<div class="wheel-box">
-<h2>🎡 عجلة الحظ</h2>
-<p style="font-size:13px;color:#ccc">ليك 3 لفات كل يوم - الجايزة بتتحفظ في حسابك</p>
-<div style="font-size:26px">⬇️</div>
+<div class="wheel-box"><h2>🎡 عجلة الحظ</h2><p style="font-size:13px;color:#ccc">ليك 3 لفات كل يوم - الجايزة بتتحفظ في حسابك</p><div style="font-size:26px">⬇️</div>
 <div class="wheel" id="wheel"><span>60 شدة</span><span>حظ أوفر</span><span>خصم 20%</span><span>حظ أوفر</span><span>10 شدات</span><span>حظ أوفر</span><span>خصم 50%</span><span>بطاقة ببجي</span></div>
-<p id="leftTxt">فاضلك: 3 لفات</p>
-<button class="btn" style="background:#f5c518" onclick="spin()">لف العجلة 🎡</button>
-<div id="wheelMsg" style="color:#f5c518;font-weight:bold;margin-top:8px;min-height:22px"></div>
-</div>
+<p id="leftTxt">فاضلك: 3 لفات</p><button class="btn" style="background:#f5c518" onclick="spin()">لف العجلة 🎡</button><div id="wheelMsg" style="color:#f5c518;font-weight:bold;margin-top:8px;min-height:22px"></div></div>
 
-<div class="grid" id="grid"></div>
-<p style="text-align:center;color:#777;font-size:12px;margin:18px 0">HAMO STORE - 01208398454</p>
+<div class="grid" id="grid"></div><p style="text-align:center;color:#777;font-size:12px;margin:18px 0">HAMO STORE - الدفع على 01208398454</p>
 
-<!-- تسجيل دخول -->
-<div class="modal" id="loginModal"><div>
-<h2>تسجيل الدخول</h2>
-<p style="font-size:13px;color:#ccc">سجل برقم تليفونك او جوجل او فيسبوك</p>
-<input id="phoneInput" placeholder="رقم الموبايل - 01xxxxxxxxx">
-<button class="btn" style="background:#25D366;color:#fff" onclick="loginPhone()">دخول برقم الهاتف 📱</button>
-<div style="margin:12px 0;color:#888">—— أو ——</div>
-<div class="social">
-<button style="background:#fff;color:#000" onclick="loginSocial('Google')">G Google</button>
-<button style="background:#1877F2;color:#fff" onclick="loginSocial('Facebook')">f Facebook</button>
-</div>
-<button class="btn" style="background:#333;color:#fff" onclick="closeModal('loginModal')">إلغاء</button>
-<p style="font-size:11px;color:#777;margin-top:8px">للتفعيل الحقيقي اربط الموقع بـ Firebase Auth - دلوقتي شغال تجريبي ومحفوظ في جهاز العميل</p>
-</div></div>
+<div class="modal" id="loginModal"><div><h2>تسجيل الدخول</h2><p style="font-size:13px;color:#ccc">سجل برقم تليفونك او جوجل او فيسبوك</p><input id="phoneInput" placeholder="رقم الموبايل - 01xxxxxxxxx"><button class="btn" style="background:#25D366;color:#fff" onclick="loginPhone()">دخول برقم الهاتف 📱</button><div style="margin:12px 0;color:#888">—— أو ——</div><div class="social"><button style="background:#fff;color:#000" onclick="loginSocial('Google')">G Google</button><button style="background:#1877F2;color:#fff" onclick="loginSocial('Facebook')">f Facebook</button></div><button class="btn" style="background:#333;color:#fff" onclick="closeModal('loginModal')">إلغاء</button></div></div>
 
-<!-- الدفع -->
-<div class="modal" id="payModal"><div>
-<h3 id="payTitle">الدفع</h3>
-<div id="payStep1">
-<p style="font-size:13px">ID ببجي: <b id="payIdShow"></b></p>
-<p style="font-size:13px">رقم المحفظة اللي هتدفع منها (فودافون / أورانج كاش)</p>
-<input id="walletPhone" placeholder="01xxxxxxxxx - رقم المحفظة">
-<label style="font-size:13px">اختر المحفظة:</label>
-<div class="social" style="margin-top:8px">
-<button style="background:#e60000;color:#fff" onclick="selectWallet('فودافون كاش')">فودافون كاش</button>
-<button style="background:#ff7900;color:#fff" onclick="selectWallet('أورانج كاش')">أورانج كاش</button>
-</div>
-<p id="walletChoosen" style="color:#f5c518;margin-top:8px">اختر المحفظة</p>
-<button class="btn" style="background:#f5c518" onclick="sendPayLink()">ابعتلي طلب الدفع 📩</button>
-<button class="btn" style="background:#333;color:#fff" onclick="closeModal('payModal')">إلغاء</button>
-</div>
-<div id="payStep2" style="display:none">
-<h3>📩 تم ارسال طلب الدفع</h3>
-<p style="font-size:13px;line-height:1.7;margin:10px 0">بعتنا رسالة على رقم <b id="walletShow"></b><br>فيها لينك الدفع والمبلغ<br>دوس على اللينك عشان يفتحلك تطبيق الدفع</p>
-<div class="paynum" id="payLinkTxt">https://pay.hamo.store/xxxx</div>
-<button class="btn" style="background:#fff" onclick="openWalletApp()">افتح تطبيق الدفع 📱</button>
-<button class="btn" style="background:#25D366" onclick="confirmPaid()">انا دفعت - تأكيد ✅</button>
-<p style="font-size:11px;color:#888">بعد الدفع الشدات هتوصلك على ID ببجي بتاعك</p>
-</div>
-<div id="payStep3" style="display:none">
-<h2 style="color:#25D366">تم الدفع بنجاح ✅</h2>
-<p id="successTxt" style="line-height:1.8;margin:12px 0"></p>
-<p style="font-size:12px;color:#f5c518">تم شحن الشدات على حساب ببجي بتاعك - لو موصلتش خلال 10 دقايق كلمنا على 01208398454</p>
-<button class="btn" style="background:#f5c518" onclick="closeModal('payModal')">تمام</button>
-</div>
-</div></div>
-
-<script>
-let cur=null, wallet="لم تختار", user=null;
-let items=[
-{name:"60 شدة",price:50,img:"https://images.unsplash.com/photo-1542751371-adc38448a05e?w=400"},
-{name:"325 شدة",price:250,img:"https://images.unsplash.com/photo-1542751371-adc38448a05e?w=400"},
-{name:"660 شدة",price:490,img:"https://images.unsplash.com/photo-1542751371-adc38448a05e?w=400"},
-{name:"1800 شدة",price:1300,img:"https://images.unsplash.com/photo-1542751371-adc38448a05e?w=400"},
-{name:"3850 شدة",price:2600,img:"https://images.unsplash.com/photo-1542751371-adc38448a05e?w=400"},
-{name:"8100 شدة",price:5100,img:"https://images.unsplash.com/photo-1542751371-adc38448a05e?w=400"}
-];
-let savedUser=JSON.parse(localStorage.getItem("hamoUser")||"null");
-if(savedUser){user=savedUser; showUser();}
-function showUser(){document.getElementById("userInfo").innerText="👤 "+user.name+" | "+user.phone;document.getElementById("profileBox").style.display="block";if(user.pubgId){document.getElementById("savedIdTxt").innerText=user.pubgId;document.getElementById("pubgIdInput").value=user.pubgId;}document.getElementById("myPrize").innerText=user.prize||"لا يوجد";}
-function openLogin(){document.getElementById("loginModal").style.display="flex";}
-function closeModal(id){document.getElementById(id).style.display="none";}
-function loginPhone(){let p=document.getElementById("phoneInput").value.trim();if(p.length<11){alert("اكتب رقم تليفون صح");return;}user={name:"عميل HAMO",phone:p,pubgId:"",prize:""};localStorage.setItem("hamoUser",JSON.stringify(user));showUser();closeModal('loginModal');alert("تم تسجيل الدخول برقم "+p);}
-function loginSocial(type){let p=prompt("اكتب رقم تليفونك عشان نكمل تسجيل "+type);if(!p)return;user={name:"عميل "+type,phone:p,pubgId:"",prize:""};localStorage.setItem("hamoUser",JSON.stringify(user));showUser();closeModal('loginModal');alert("تم الدخول بحساب "+type);}
-function savePubgId(){if(!user){alert("سجل دخول الأول");openLogin();return;}let id=document.getElementById("pubgIdInput").value.trim();if(!id){alert("اكتب ID ببجي");return;}user.pubgId=id;localStorage.setItem("hamoUser",JSON.stringify(user));document.getElementById("savedIdTxt").innerText=id;alert("تم حفظ ID ببجي: "+id);}
-
-let grid=document.getElementById("grid");
-function render(){
-grid.innerHTML="";
-items.forEach(i=>{
-let finalPrice=i.price;let show="";
-if(user&&user.prize&&user.prize.includes("20%")){finalPrice=Math.round(i.price*0.8);show="<br><small style='color:#25D366'>بعد خصم العجلة 20%: "+finalPrice+" ج بدل "+i.price+"</small>";}
-if(user&&user.prize&&user.prize.includes("50%")){finalPrice=Math.round(i.price*0.5);show="<br><small style='color:#25D366'>بعد خصم العجلة 50%: "+finalPrice+" ج بدل "+i.price+"</small>";}
-grid.innerHTML+=`<div class="card"><img src="${i.img}"><h3>${i.name}</h3><p>${i.price} ج</p>${show}<button onclick="openPay('${i.name}',${finalPrice})">اشتري وادفع</button></div>`;
-});
-}
-render();
-function openPay(name,price){
-if(!user){alert("سجل دخول الأول برقم تليفونك او جوجل او فيسبوك");openLogin();return;}
-if(!user.pubgId){alert("اكتب ID ببجي الأول في حسابي عشان الشدات توصلك");document.getElementById("profileBox").scrollIntoView();return;}
-cur={name,price};document.getElementById("payTitle").innerText="ادفع: "+name+" - "+price+" ج";document.getElementById("payIdShow").innerText=user.pubgId;document.getElementById("payStep1").style.display="block";document.getElementById("payStep2").style.display="none";document.getElementById("payStep3").style.display="none";document.getElementById("payModal").style.display="flex";
-}
-function selectWallet(w){wallet=w;document.getElementById("walletChoosen").innerText="اخترت: "+w;}
-function sendPayLink(){
-let wp=document.getElementById("walletPhone").value.trim();if(wp.length<11){alert("اكتب رقم المحفظة صح");return;}
-if(wallet=="لم تختار"){alert("اختر المحفظة - فودافون او أورانج");return;}
-document.getElementById("walletShow").innerText=wp+" - "+wallet;
-document.getElementById("payLinkTxt").innerText="https://pay.hamo.store/"+cur.name.replace(" ","")+"-"+Math.floor(1000+Math.random()*9000);
-document.getElementById("payStep1").style.display="none";document.getElementById("payStep2").style.display="block";
-alert("تم ارسال رسالة على "+wp+" فيها لينك الدفع - دوس على اللينك عشان يفتح "+wallet);
-}
-function openWalletApp(){
-if(wallet.includes("فودافون")){window.open("https://m.vodafone.com.eg","_blank");}
-else{window.open("https://www.orange.eg","_blank");}
-}
-function confirmPaid(){
-document.getElementById("payStep2").style.display="none";document.getElementById("payStep3").style.display="block";
-document.getElementById("successTxt").innerHTML="الباقة: "+cur.name+"<br>المبلغ: "+cur.price+" ج<br>ID ببجي: "+user.pubgId+"<br>المحفظة: "+wallet+"<br>الحالة: تم الشحن ✅<br>الشدات وصلت لحسابك";
-if(user.prize){user.prize="";localStorage.setItem("hamoUser",JSON.stringify(user));}
-render();
-}
-let today=new Date().toDateString();let wheelData=JSON.parse(localStorage.getItem("hamoWheel")||"{}");
-if(wheelData.date!==today){wheelData={date:today,count:0};}
-let deg=0;function updateLeft(){document.getElementById("leftTxt").innerText="فاضلك: "+(3-wheelData.count)+" لفات النهاردة";}
-updateLeft();
-function spin(){
-if(!user){alert("سجل دخول الأول عشان تلف العجلة");openLogin();return;}
-if(!user.pubgId){alert("اكتب ID ببجي الأول في حسابي");return;}
-if(wheelData.count>=3){alert("خلصت 3 لفات النهاردة");return;}
-let prizes=["مبروك كسبت 60 شدة 🎉","حظ أوفر، جرب تاني 🥲","مبروك خصم 20% 🎉","حظ أوفر، جرب تاني 🥲","مبروك كسبت 10 شدات 🎉","حظ أوفر، جرب تاني 🥲","مبروك خصم 50% 🎉","مبروك كسبت بطاقة ببجي 🎁"];
-let idx=Math.floor(Math.random()*8);deg+=1440+(idx*45)+20;document.getElementById("wheel").style.transform="rotate("+deg+"deg)";document.getElementById("wheelMsg").innerText="بتلف...";wheelData.count++;localStorage.setItem("hamoWheel",JSON.stringify(wheelData));
-setTimeout(()=>{document.getElementById("wheelMsg").innerText=prizes[idx];updateLeft();if(prizes[idx].includes("مبروك")){user.prize=prizes[idx];localStorage.setItem("hamoUser",JSON.stringify(user));document.getElementById("myPrize").innerText=prizes[idx];alert(prizes[idx]+"\nالجايزة اتحفظت في حسابك، وهتتخصم لوحدها لما تشتري");render();}},3100);
-}
-</script>
-</body>
-</html>
+<div class="modal" id="payModal"><div><h3 id="payTitle">الدفع</h3>
+<div id="payStep1"><p style="font-size:13px">ID ببجي: <b id="payIdShow"></b></p><p style="font-size:13px;margin-top:8px">اختار طريقة الدفع - كلها على 01208398454:</p>
+<div style="display:flex;gap:8px;flex-wrap:wrap;margin:10px 0">
+<div class="payOpt" onclick="selectWallet(this,'فودافون كاش')">🟥<br>فودافون كاش</div>
+<div class="payOpt" onclick="selectWallet(this,'أورانج كاش')">🟧<br>أورانج كاش</div>
+<div class="payOpt" onclick="selectWallet(this,'اتصالات كاش')">🟩<br>اتصالات كاش</div>
+<div class="payOpt" onclick="selectWallet(this,'انستا باي')">💳<br>انستا باي</div>
+<div class="payOpt" onclick="selectWallet(this,'فوري')">🟡<br>فوري</div>
+<div class="payOpt" onclick="selectWallet(this,'محفظة بنكية')">🏦<br>محفظة بنكية</div></div>
+<p id="walletChoosen" style="color:#f5c518">اختر طريقة الدفع</p><p style="font-size:13px">رقم المحفظة اللي هتدفع منها</p><input id="walletPhone" placeholder="01xxxxxxxxx"><button class="btn" style="background:#f5c518" onclick="sendPayLink()">تأكيد واظهار بيانات الدفع 📩</button><button class="btn" style="background:#333;color:#fff" onclick="closeModal('payModal')">إلغاء</button></div>
+<div id="payStep2" style="display:none"><h3>📩 بيانات الدفع</h3><p style="font-size:13px;line-height:1.8;margin:10px 0">حول <b id="amountShow"></b> على الرقم ده<br>من <b id="walletShow2"></b></p><div class="paynum">01208398454</div>
+<button class="btn" style="background:#fff" onclick="copyPayNum()">نسخ رقم الدفع 📋</button>
+<button class="btn" style="background:#e60000;color:#fff" onclick="openWalletApp()">تحويل أموال الآن - افتح التطبيق 💸</button>
+<p id="ussdHint" style="font-size:12px;color:#f5c518;margin-top:8px"></p>
+<div style="background:#2a2a2a;padding:12px;border-radius:10px;margin-top:10px;font-size:13px;line-height:1.7">⏳ <b>بعد ما تحول:</b><br>الطلب بيوصلي وبتأكد من التحويل وبشحنلك الشدات على
