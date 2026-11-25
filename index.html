@@ -3,15 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>HAMO STORE - عصري</title>
+<title>HAMO STORE</title>
 <style>
 *{box-sizing:border-box}
 body{margin:0;background:#0f0f1a;color:#fff;font-family:Arial;text-align:center;padding-bottom:90px}
 .top{background:linear-gradient(135deg,#1a1a2e,#16213e);padding:14px 14px 10px;position:sticky;top:0;z-index:10;box-shadow:0 4px 20px rgba(0,0,0,.4);border-bottom:1px solid #2a2a4a}
-.top1{display:flex;justify-content:space-between;align-items:center}
-.logo{font-weight:900;font-size:24px}
+.top1{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.logo{font-weight:900;font-size:22px;white-space:nowrap}
 .logo span{background:linear-gradient(90deg,#f5c518,#ff6b00);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.icons{font-size:20px;display:flex;gap:14px}
+.login-btn{background:linear-gradient(135deg,#f5c518,#ff6b00);color:#000;border:0;padding:10px 14px;border-radius:12px;font-weight:900;font-size:14px;cursor:pointer;white-space:nowrap}
+.icons{font-size:20px;display:flex;gap:12px}
 .search{display:flex;gap:8px;margin-top:12px}
 .search input{flex:1;padding:13px 14px;border-radius:14px;border:1px solid #2a2a4a;background:#1a1a2e;color:#fff;text-align:right;font-size:14px;outline:none}
 .search button{width:50px;border:0;border-radius:14px;background:linear-gradient(135deg,#f5c518,#ff6b00);font-size:18px;cursor:pointer}
@@ -49,13 +50,12 @@ body{margin:0;background:#0f0f1a;color:#fff;font-family:Arial;text-align:center;
 .small{color:#888;font-size:12px;line-height:1.7}
 .locked-box{background:#fff7e6;border:1px dashed #f5c518;border-radius:12px;padding:12px;margin:10px 0;color:#111}
 .prize-active{background:#0f2a1a;border:1px solid #25D366;border-radius:12px;padding:10px;margin:10px 14px;font-size:14px;color:#7CFC9A}
-/* العجلة الجذابة - الكتابة عليها */
 .wheel-box{background:linear-gradient(180deg,#2a1a00,#1a1a2e);border:2px solid #f5c518;border-radius:22px;padding:18px;margin:14px;box-shadow:0 0 30px rgba(245,197,24,.25)}
 .wheel-wrap{position:relative;width:260px;height:260px;margin:16px auto}
 .wheel-outer{position:absolute;inset:0;border-radius:50%;background:conic-gradient(#f5c518 0 45deg,#ff6b00 45deg 90deg,#25D366 90deg 135deg,#1877F2 135deg 180deg,#e91e63 180deg 225deg,#9c27b0 225deg 270deg,#00bcd4 270deg 315deg,#333 315deg 360deg);border:6px solid #fff;box-shadow:0 0 0 6px #f5c518,0 10px 30px rgba(0,0,0,.5);transition:transform 4s cubic-bezier(.17,.67,.21,1)}
 .wheel-label{position:absolute;top:50%;left:50%;width:110px;text-align:center;font-size:12px;font-weight:900;color:#fff;text-shadow:0 1px 3px #000;line-height:1.2;transform-origin:0 0;pointer-events:none}
-.wheel-center{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:70px;height:70px;background:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:28px;z-index:5;border:4px solid #f5c518;box-shadow:0 4px 12px rgba(0,0,0,.4)}
-.pointer{position:absolute;top:-10px;left:50%;transform:translateX(-50%);font-size:32px;z-index:10;filter:drop-shadow(0 2px 4px rgba(0,0,0,.5))}
+.wheel-center{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:70px;height:70px;background:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:28px;z-index:5;border:4px solid #f5c518}
+.pointer{position:absolute;top:-10px;left:50%;transform:translateX(-50%);font-size:32px;z-index:10}
 .modal{position:fixed;inset:0;background:rgba(0,0,0,.75);display:flex;align-items:flex-end;justify-content:center;z-index:100}
 .modal-box{background:#1a1a2e;width:100%;max-width:480px;border-radius:22px 22px 0 0;padding:18px;text-align:center}
 .pay-opt{display:flex;gap:10px;margin-top:12px}
@@ -67,7 +67,9 @@ body{margin:0;background:#0f0f1a;color:#fff;font-family:Arial;text-align:center;
 <div class="top">
 <div class="top1">
 <div class="logo">HAMO <span>STORE</span> 🎮</div>
-<div class="icons"><span onclick="showPage('cart')">🛒</span><span>🔔</span><span onclick="showPage('account')">👤</span></div>
+<!-- زرار تسجيل الدخول - باين فوق -->
+<button class="login-btn" onclick="showPage('account')" id="loginBtn">دخول / تسجيل 🔑</button>
+<div class="icons"><span onclick="showPage('cart')">🛒</span><span>🔔</span></div>
 </div>
 <div class="search"><input id="searchInput" placeholder="🔍 ابحث عن باقة..." oninput="doSearch()"><button>🔍</button></div>
 </div>
@@ -83,7 +85,16 @@ body{margin:0;background:#0f0f1a;color:#fff;font-family:Arial;text-align:center;
 <div id="page-store">
 <div class="sec"><h3>شحن الشدات - PUBG 🔥</h3><p>مكسب العجلة بيتفعل على البطاقات هنا في نفس الصفحة</p></div>
 <div id="activePrizeBox"></div>
-<div class="grid" id="grid"></div>
+
+<!-- البطاقات - مكتوبة ثابتة عشان متختفيش تاني -->
+<div class="grid" id="grid">
+<div class="card2 c1" data-name="60 شدة" data-index="0"><div class="img">🔥</div><b class="uc-text">60 شدة</b><div class="price">EGP 55.59</div><div class="after"></div><button onclick="buyPkg(0)">اشتري وادفع</button></div>
+<div class="card2 c2 hot" data-name="325 شدة" data-index="1"><span class="badge">الأكثر مبيعا 🔥</span><div class="img">💎</div><b class="uc-text">325 شدة</b><div class="price">EGP 280.21</div><div class="after"></div><button onclick="buyPkg(1)">اشتري وادفع</button></div>
+<div class="card2 c3" data-name="660 شدة" data-index="2"><div class="img">👑</div><b class="uc-text">660 شدة</b><div class="price">EGP 561.00</div><div class="after"></div><button onclick="buyPkg(2)">اشتري وادفع</button></div>
+<div class="card2 c4" data-name="1800 شدة" data-index="3"><div class="img">🚀</div><b class="uc-text">1800 شدة</b><div class="price">EGP 1,525.38</div><div class="after"></div><button onclick="buyPkg(3)">اشتري وادفع</button></div>
+<div class="card2 c5" data-name="3850 شدة" data-index="4"><div class="img">⭐</div><b class="uc-text">3850 شدة</b><div class="price">EGP 2,837.79</div><div class="after"></div><button onclick="buyPkg(4)">اشتري وادفع</button></div>
+<div class="card2 c6" data-name="8100 شدة" data-index="5"><div class="img">🏆</div><b class="uc-text">8100 شدة</b><div class="price">EGP 6,103.38</div><div class="after"></div><button onclick="buyPkg(5)">اشتري وادفع</button></div>
+</div>
 
 <div class="wheel-box">
 <h3 style="margin:0">🎡 عجلة الحظ - لف واكسب</h3>
@@ -97,7 +108,6 @@ body{margin:0;background:#0f0f1a;color:#fff;font-family:Arial;text-align:center;
 <div class="wheel-wrap">
 <div class="pointer">⬇️</div>
 <div id="wheel" class="wheel-outer">
-<!-- الكتابة على العجلة نفسها -->
 <div class="wheel-label" style="transform:rotate(22deg) translate(68px,-8px)">🔥 3 شدات</div>
 <div class="wheel-label" style="transform:rotate(67deg) translate(68px,-8px)">🎁 خصم 2%</div>
 <div class="wheel-label" style="transform:rotate(112deg) translate(68px,-8px)">✨ 1 شدة</div>
@@ -128,11 +138,12 @@ body{margin:0;background:#0f0f1a;color:#fff;font-family:Arial;text-align:center;
 </div>
 
 <div id="page-account" class="card hidden">
-<h3>👤 حسابي</h3>
+<h3>👤 حسابي - دخول / تسجيل</h3>
+<p class="small" id="loginHint">سجل مرة واحدة - هيفضل محفوظ</p>
 <input id="phoneNum" placeholder="رقمك">
 <input id="pubgIdLogin" placeholder="ID ببجي">
 <input id="playerNameLogin" placeholder="اسمك في اللعبة">
-<button class="btn" onclick="registerNow()" style="background:#25D366;color:#fff">📱 تسجيل</button>
+<button class="btn" onclick="registerNow()" style="background:#25D366;color:#fff">📱 تسجيل دخول</button>
 <p id="accInfo" class="small"></p>
 <button class="btn" onclick="logout()" style="background:#333;color:#fff">تسجيل خروج</button>
 </div>
@@ -178,15 +189,15 @@ body{margin:0;background:#0f0f1a;color:#fff;font-family:Arial;text-align:center;
 let userPhone = localStorage.getItem("hamo_phone")||"";
 let userPubgId = localStorage.getItem("hamo_pubg_id")||"";
 let userPlayerName = localStorage.getItem("hamo_player_name")||"";
-const MAX_SPINS = 3; // 3 بس - متتغيرش
+const MAX_SPINS = 3;
 const SELL_NUMBER = "01208398454";
 const baseItems=[
-{uc:60,price:55.59,icon:"🔥",cls:"c1",hot:false},
-{uc:325,price:280.21,icon:"💎",cls:"c2",hot:true},
-{uc:660,price:561.00,icon:"👑",cls:"c3",hot:false},
-{uc:1800,price:1525.38,icon:"🚀",cls:"c4",hot:false},
-{uc:3850,price:2837.79,icon:"⭐",cls:"c5",hot:false},
-{uc:8100,price:6103.38,icon:"🏆",cls:"c6",hot:false},
+{uc:60,price:55.59},
+{uc:325,price:280.21},
+{uc:660,price:561.00},
+{uc:1800,price:1525.38},
+{uc:3850,price:2837.79},
+{uc:8100,price:6103.38},
 ];
 let selected=null;
 let allPrizes=JSON.parse(localStorage.getItem("hamo_wheel_prizes")||"[]");
@@ -202,36 +213,33 @@ function getActiveBonus(){
  });
  return {discount, extraUC};
 }
-function renderCards(){
+// تحديث البطاقات الثابتة - من غير ما نمسحها
+function updateCards(){
  let b=getActiveBonus();
- let grid=document.getElementById("grid");
- grid.innerHTML="";
- baseItems.forEach((item,i)=>{
-  let finalPrice = item.price * (1 - b.discount/100);
-  let finalUC = item.uc + b.extraUC;
-  let hasBonus = b.discount>0 || b.extraUC>0;
-  grid.innerHTML+=`
-  <div class="card2 ${item.cls} ${item.hot?'hot':''}" data-name="${item.uc} شدة">
-   ${item.hot?`<span class="badge">الأكثر مبيعا 🔥</span>`:""}
-   <div class="img">${item.icon}</div>
-   <b>${finalUC} شدة</b>
-   <div class="price">EGP ${finalPrice.toFixed(2)}</div>
-   <div class="after">${hasBonus?`✅ بعد مكسب العجلة: +${b.extraUC} شدة${b.discount>0?` - خصم ${b.discount}%`:``}`:""}</div>
-   <button onclick="buyPkg(${i})">اشتري وادفع</button>
-  </div>`;
+ document.querySelectorAll("#grid .card2").forEach((card)=>{
+  let i=parseInt(card.dataset.index);
+  let item=baseItems[i];
+  let finalPrice=item.price*(1-b.discount/100);
+  let finalUC=item.uc+b.extraUC;
+  card.querySelector(".uc-text").innerText=finalUC+" شدة";
+  card.querySelector(".price").innerText="EGP "+finalPrice.toFixed(2);
+  card.querySelector(".after").innerText=(b.discount>0||b.extraUC>0)?`✅ بعد مكسب العجلة: +${b.extraUC} شدة${b.discount>0?` - خصم ${b.discount}%`:``}`:"";
  });
  let box=document.getElementById("activePrizeBox");
  if(b.discount>0||b.extraUC>0){
   box.innerHTML=`<div class="prize-active">✅ مكسب العجلة متفعل على كل البطاقات: ${b.discount>0?` خصم ${b.discount}% `:``} ${b.extraUC>0?` + ${b.extraUC} شدة `:``}</div>`;
  } else { box.innerHTML=""; }
+ // زرار الدخول يتغير لو مسجل
+ let lb=document.getElementById("loginBtn");
+ if(userPhone){lb.innerText="👤 "+userPubgId+" ✅";lb.style.background="#25D366";}
 }
-renderCards();
+updateCards();
 function showPage(p,btn){
  ["store","account","orders","wheel","cart"].forEach(x=>document.getElementById("page-"+x).classList.add("hidden"));
  document.getElementById("page-"+p).classList.remove("hidden");
  if(btn){document.querySelectorAll(".bottom button").forEach(b=>b.classList.remove("active"));btn.classList.add("active");}
  if(p=="orders"){let o=JSON.parse(localStorage.getItem("hamo_orders")||"[]");document.getElementById("ordersList").innerHTML=o.length?o.map(x=>"• "+x).join("<br>"):"لسه مفيش طلبات";}
- if(p=="account"){document.getElementById("accInfo").innerHTML=userPhone?`📱 ${userPhone}<br>🎮 ID: ${userPubgId}`:"لسه مسجلتش";}
+ if(p=="account"){document.getElementById("accInfo").innerHTML=userPhone?`📱 ${userPhone}<br>🎮 ID: ${userPubgId}<br>👤 ${userPlayerName||""}`:"لسه مسجلتش - سجل فوق";}
  window.scrollTo({top:0});
 }
 function filterCat(c,btn){
@@ -253,6 +261,7 @@ function registerNow(){
  userPhone=phone;userPubgId=id;userPlayerName=name;
  localStorage.setItem("hamo_phone",phone);localStorage.setItem("hamo_pubg_id",id);localStorage.setItem("hamo_player_name",name);
  document.getElementById("pubgId").value=id;document.getElementById("playerName").value=name;
+ updateCards();
  alert("تم التسجيل ✅"); showPage("store");
 }
 function logout(){localStorage.clear();location.reload();}
@@ -305,32 +314,4 @@ function getCount(){return parseInt(localStorage.getItem("hamo_spin_"+todayKey()
 function isUnlocked(){return localStorage.getItem("hamo_bought")==="yes" || localStorage.getItem("hamo_unlocked")==="yes";}
 function updateWheelUI(){
  let lockBox=document.getElementById("wheelLockBox");
- let playBox=document.getElementById("wheelPlayBox");
- if(!isUnlocked()){lockBox.classList.remove("hidden");playBox.classList.add("hidden");return;}
- lockBox.classList.add("hidden");playBox.classList.remove("hidden");
- let used=getCount();
- let left=MAX_SPINS-used;
- document.getElementById("spinLeft").innerText="فاضلك: "+left+" لفات";
- document.getElementById("spinUsed").innerText=`لعبت ${used} من 3 النهارده - ${left>0?"فاضل "+left:"خلصت"}`;
- let btn=document.getElementById("spinBtn");
- if(left<=0 || isSpinning){btn.disabled=true;btn.innerText="⛔ خلصت 3 لفات - جرب بكرة 🎡";btn.style.opacity="0.5";}
- else {btn.disabled=false;btn.innerText=`🎡 لف العجلة ( فاضل ${left} )`;btn.style.opacity="1";}
- let mp=document.getElementById("myPrizesBox");
- if(mp && allPrizes.length) mp.innerHTML=`<div class="prize-active"><b>جوايزك المفعلة:</b><br>${allPrizes.map(p=>"• "+p).join("<br>")}</div>`;
-}
-updateWheelUI();
-function spinWheel(){
- if(isSpinning) return;
- if(!isUnlocked()){alert("اشتري باقة الأول عشان تفتح العجلة 🔒");return;}
- let c=getCount();
- // قفل صارم: لو وصل 3 مينفعش يلف تاني خالص النهارده
- if(c>=MAX_SPINS){alert("⛔ خلصت 3 لفات النهارده، جرب بكرة 🎡");updateWheelUI();return;}
- isSpinning=true;
- updateWheelUI();
- let btn=document.getElementById("spinBtn");btn.disabled=true;btn.innerText="جاري اللف... ⏳";
- let deg=360*5+Math.floor(Math.random()*360);
- document.getElementById("wheel").style.transform=`rotate(${deg}deg)`;
- setTimeout(()=>{
-  let idx=Math.floor(((deg%360)/45))%8;
-  let prize=prizes[(8-idx)%8];
-  allPrizes.push(prize);localStorage.setItem("hamo_wh
+ let playBox=document.getElementById("wh
