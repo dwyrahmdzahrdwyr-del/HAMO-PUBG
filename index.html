@@ -31,7 +31,6 @@ body{margin:0;background:#f6f6f6;color:#111;font-family:Arial;text-align:center;
 .c6 .img{background:linear-gradient(180deg,#2dd4a8,#00a86b)}
 .card2 b{display:block;margin:10px 0 2px;font-size:15px}
 .card2 .price{color:#111;font-weight:900;font-size:16px;margin:4px 0 8px}
-.card2 .price small{color:#888;font-weight:400;font-size:12px}
 .card2 button{background:#f5c518;color:#000;border:0;width:calc(100% - 16px);padding:11px;border-radius:10px;font-weight:900;margin:0 8px 10px;cursor:pointer}
 .card{background:#fff;border-radius:16px;padding:16px;margin:14px 12px;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.06)}
 .card input,.card select{width:100%;padding:13px;border-radius:12px;border:1px solid #ddd;background:#f9f9f9;text-align:center;margin-top:9px;font-size:16px;outline:none}
@@ -48,6 +47,8 @@ body{margin:0;background:#f6f6f6;color:#111;font-family:Arial;text-align:center;
 .pay{border:1px solid #eee;border-radius:12px;padding:12px;margin-top:8px;line-height:2}
 .pay b{display:block;font-size:19px;direction:ltr}
 .small{color:#888;font-size:12px;line-height:1.7}
+.locked-box{background:#fff7e6;border:1px dashed #f5c518;border-radius:12px;padding:12px;margin:10px 0}
+.prize-active{background:#e8f5e9;border:1px solid #25D366;border-radius:12px;padding:10px;margin:10px 0;font-size:14px;color:#1b5e20}
 </style>
 </head>
 <body>
@@ -70,31 +71,42 @@ body{margin:0;background:#f6f6f6;color:#111;font-family:Arial;text-align:center;
 
 <div id="page-store">
 <div class="sec"><h3>شحن الشدات - PUBG</h3></div>
+<div id="activePrizeBox" style="padding:0 12px"></div>
 <div class="grid" id="grid">
-<div class="card2 c1" data-name="60 شدة"><div class="img">🔥</div><b>60 شدة</b><div class="price">EGP 49.63 <small>EGP</small></div><button onclick="buyPkg(0)">اشتري وادفع</button></div>
-<div class="card2 c2" data-name="325 شدة"><div class="img">💎</div><b>325 شدة</b><div class="price">EGP 250.19</div><button onclick="buyPkg(1)">اشتري وادفع</button></div>
-<div class="card2 c3" data-name="660 شدة"><div class="img">👑</div><b>660 شدة</b><div class="price">EGP 500.89</div><button onclick="buyPkg(2)">اشتري وادفع</button></div>
-<div class="card2 c4" data-name="1800 شدة"><div class="img">🚀</div><b>1800 شدة</b><div class="price">EGP 1,361.95</div><button onclick="buyPkg(3)">اشتري وادفع</button></div>
-<div class="card2 c5" data-name="3850 شدة"><div class="img">⭐</div><b>3850 شدة</b><div class="price">EGP 2,533.74</div><button onclick="buyPkg(4)">اشتري وادفع</button></div>
-<div class="card2 c6" data-name="8100 شدة"><div class="img">🏆</div><b>8100 شدة</b><div class="price">EGP 5,449.45</div><button onclick="buyPkg(5)">اشتري وادفع</button></div>
+<div class="card2 c1" data-name="60 شدة"><div class="img">🔥</div><b>60 شدة</b><div class="price">EGP 55.59</div><button onclick="buyPkg(0)">اشتري وادفع</button></div>
+<div class="card2 c2" data-name="325 شدة"><div class="img">💎</div><b>325 شدة</b><div class="price">EGP 280.21</div><button onclick="buyPkg(1)">اشتري وادفع</button></div>
+<div class="card2 c3" data-name="660 شدة"><div class="img">👑</div><b>660 شدة</b><div class="price">EGP 561.00</div><button onclick="buyPkg(2)">اشتري وادفع</button></div>
+<div class="card2 c4" data-name="1800 شدة"><div class="img">🚀</div><b>1800 شدة</b><div class="price">EGP 1,525.38</div><button onclick="buyPkg(3)">اشتري وادفع</button></div>
+<div class="card2 c5" data-name="3850 شدة"><div class="img">⭐</div><b>3850 شدة</b><div class="price">EGP 2,837.79</div><button onclick="buyPkg(4)">اشتري وادفع</button></div>
+<div class="card2 c6" data-name="8100 شدة"><div class="img">🏆</div><b>8100 شدة</b><div class="price">EGP 6,103.38</div><button onclick="buyPkg(5)">اشتري وادفع</button></div>
 </div>
 
 <div class="wheel-box" id="wheelSection">
 <h3 style="margin:0">عجلة الحظ 🎡</h3>
-<p class="small">ليك 3 لفات كل يوم - لف واكسب</p>
+<p class="small">ليك 3 لفات كل يوم - بس بعد ما تشتري</p>
+<div id="wheelLockBox" class="locked-box">
+<b>🔒 العجلة مقفولة</b><br>
+<span class="small">اشتري أي باقة الأول عشان تتفتح ليك 3 لفات النهارده</span><br>
+<button class="btn" onclick="document.getElementById('grid').scrollIntoView({behavior:'smooth'})" style="background:#f5c518">🛒 اشتري الأول وافتح العجلة</button>
+</div>
+<div id="wheelPlayBox" class="hidden">
 <div class="wheel-wrap"><div class="pointer">⬇️</div><div id="wheel">🎁 لف واكسب</div></div>
 <p id="wheelResult" style="color:#eab308;font-weight:900"></p>
 <p id="spinLeft">فاضلك: 3 لفات</p>
 <button class="btn" onclick="spinWheel()" id="spinBtn" style="background:#f5c518">🎡 لف العجلة</button>
+<div id="myPrizesBox"></div>
 <button class="btn" onclick="goWheelOrder()" style="background:#25D366;color:#fff">اطلب بالجايزة على واتساب 📲</button>
+<p class="small">✅ الجايزة هتتطبق أوتوماتيك على البطاقات لما تشتري</p>
+</div>
 </div>
 
+<!-- بيانات المستخدمين زي ما هي - رجعت -->
 <div class="card">
 <h3>🎮 بيانات الشحن</h3>
 <input id="pubgId" placeholder="ID ببجي">
 <input id="playerName" placeholder="اسمك في اللعبة">
 <select id="payMethod"><option>فودافون كاش - 01208398454</option><option>انستا باي</option><option>محفظة</option></select>
-<div class="pay">فودافون كاش للتحويل:<b>01208398454</b>واتساب:<b>01103160633</b><span class="small">حول على 01208398454 وبعدين اطلب على واتساب 01103160633</span></div>
+<div class="pay">فودافون كاش للتحويل:<b>01208398454</b>واتساب للطلبات:<b>01103160633</b><span class="small">حول على 01208398454 وبعدين اطلب على واتساب 01103160633</span></div>
 </div>
 </div>
 
@@ -106,6 +118,7 @@ body{margin:0;background:#f6f6f6;color:#111;font-family:Arial;text-align:center;
 <button class="btn" onclick="registerNow()" style="background:#25D366;color:#fff">📱 تسجيل</button>
 <p id="accInfo" class="small"></p>
 <button class="btn" onclick="logout()" style="background:#eee">تسجيل خروج</button>
+<div class="small" style="margin-top:10px">فودافون كاش: <b>01208398454</b><br>واتساب: <b>01103160633</b></div>
 </div>
 
 <div id="page-orders" class="card hidden">
@@ -115,7 +128,7 @@ body{margin:0;background:#f6f6f6;color:#111;font-family:Arial;text-align:center;
 
 <div id="page-wheel" class="card hidden">
 <h3>🎡 مسابقات - عجلة الحظ</h3>
-<p class="small">ارجع للمتجر والعب العجلة تحت الكروت</p>
+<p class="small">ارجع للمتجر والعب العجلة تحت الكروت - بتتفتح بعد الشراء</p>
 <button class="btn" onclick="showPage('store')" style="background:#f5c518">ارجع للمتجر</button>
 </div>
 
@@ -135,15 +148,17 @@ body{margin:0;background:#f6f6f6;color:#111;font-family:Arial;text-align:center;
 let userPhone = localStorage.getItem("hamo_phone")||"";
 let userPubgId = localStorage.getItem("hamo_pubg_id")||"";
 let userPlayerName = localStorage.getItem("hamo_player_name")||"";
+// الأسعار دي هي اللي باينة للزبون - متفعلة عليها الزيادة ومش باين لا الأصلي ولا النسبة
 const items=[
-{uc:60,price:"49.63"},
-{uc:325,price:"250.19"},
-{uc:660,price:"500.89"},
-{uc:1800,price:"1,361.95"},
-{uc:3850,price:"2,533.74"},
-{uc:8100,price:"5,449.45"},
+{uc:60,price:55.59,display:"55.59"},
+{uc:325,price:280.21,display:"280.21"},
+{uc:660,price:561.00,display:"561.00"},
+{uc:1800,price:1525.38,display:"1,525.38"},
+{uc:3850,price:2837.79,display:"2,837.79"},
+{uc:8100,price:6103.38,display:"6,103.38"},
 ];
 let selected=items[1];
+let allPrizes=JSON.parse(localStorage.getItem("hamo_wheel_prizes")||"[]");
 function showPage(p,btn){
  ["store","account","orders","wheel","cart"].forEach(x=>document.getElementById("page-"+x).classList.add("hidden"));
  document.getElementById("page-"+p).classList.remove("hidden");
@@ -174,25 +189,70 @@ function registerNow(){
  alert("تم التسجيل ✅"); showPage("store");
 }
 function logout(){localStorage.clear();location.reload();}
+function getActiveBonus(){
+ let discount=0, extraUC=0;
+ allPrizes.forEach(p=>{
+  if(p.includes("خصم 2%")) discount=Math.max(discount,2);
+  if(p.includes("خصم 1%")) discount=Math.max(discount,1);
+  if(p.includes("3 شدات")) extraUC+=3;
+  if(p.includes("2 شدة")) extraUC+=2;
+  if(p.includes("1 شدة")) extraUC+=1;
+ });
+ return {discount, extraUC};
+}
+function updatePrizeBox(){
+ let b=getActiveBonus();
+ let box=document.getElementById("activePrizeBox");
+ if(b.discount>0 || b.extraUC>0){
+  box.innerHTML=`<div class="prize-active">✅ مكسب العجلة متفعل على البطاقات: ${b.discount>0?` خصم ${b.discount}% `:``} ${b.extraUC>0?` + ${b.extraUC} شدة هدية `:``} - هيتطبق لما تشتري</div>`;
+ } else { box.innerHTML=""; }
+ let mp=document.getElementById("myPrizesBox");
+ if(mp && allPrizes.length) mp.innerHTML=`<div class="prize-active"><b>جوايزك المفعلة:</b><br>${allPrizes.map(p=>"• "+p).join("<br>")}</div>`;
+}
+updatePrizeBox();
 function buyPkg(i){
  selected=items[i];
  let id=document.getElementById("pubgId").value.trim()||userPubgId;
  if(!id){alert("اكتب ID ببجي الأول في بيانات الشحن تحت");document.getElementById("pubgId").focus();return;}
  let pname=document.getElementById("playerName").value.trim()||userPlayerName;
  let pay=document.getElementById("payMethod").value;
+ localStorage.setItem("hamo_pubg_id",id);
+ localStorage.setItem("hamo_player_name",pname);
+ let b=getActiveBonus();
+ let finalPrice = selected.price * (1 - b.discount/100);
+ let finalUC = selected.uc + b.extraUC;
+ let finalPriceText = finalPrice.toFixed(2);
+ localStorage.setItem("hamo_bought","yes");
+ localStorage.setItem("hamo_unlocked","yes");
+ updateWheelUI();
  let o=JSON.parse(localStorage.getItem("hamo_orders")||"[]");
- o.push(`${selected.uc} شدة - EGP ${selected.price} - ${new Date().toLocaleDateString("ar-EG")}`);
+ o.push(`${finalUC} شدة - EGP ${finalPriceText} - ${new Date().toLocaleDateString("ar-EG")}`);
  localStorage.setItem("hamo_orders",JSON.stringify(o));
- let msg=`أهلا HAMO 🔥%0Aرقمي: ${userPhone}%0AID ببجي: ${id}%0Aالاسم: ${pname||"-"}%0Aعايز: ${selected.uc} شدة%0Aالسعر: EGP ${selected.price}%0A${pay}%0Aحولت على: 01208398454`;
+ let msg=`أهلا HAMO 🔥%0Aرقمي: ${userPhone}%0AID ببجي: ${id}%0Aالاسم: ${pname||"-"}%0Aعايز: ${selected.uc} شدة%0A${b.extraUC>0?`هدية العجلة: + ${b.extraUC} شدة%0A`:""}${b.discount>0?`خصم العجلة متفعل: ${b.discount}% %0A`:""}الإجمالي: ${finalUC} شدة%0Aالسعر: EGP ${finalPriceText}%0A${pay}%0Aحولت على: 01208398454`;
  window.open("https://wa.me/201103160633?text="+msg,"_blank");
+ alert("✅ تم فتح عجلة الحظ ليك! ليك 3 لفات النهارده 🎡");
 }
 const prizes=["3 شدات 🔥","خصم 2% 🎁","1 شدة ✨","حظ أوفر 😅","2 شدة 💎","خصم 1% 🎁","حظ أوفر 😅","3 شدات 🔥"];
-let allPrizes=JSON.parse(localStorage.getItem("hamo_wheel_prizes")||"[]");
 function todayKey(){return new Date().toISOString().slice(0,10)}
 function getCount(){return parseInt(localStorage.getItem("hamo_spin_"+todayKey())||"0")}
+function isUnlocked(){return localStorage.getItem("hamo_bought")==="yes" || localStorage.getItem("hamo_unlocked")==="yes";}
+function updateWheelUI(){
+ let lockBox=document.getElementById("wheelLockBox");
+ let playBox=document.getElementById("wheelPlayBox");
+ if(!isUnlocked()){lockBox.classList.remove("hidden");playBox.classList.add("hidden");return;}
+ lockBox.classList.add("hidden");playBox.classList.remove("hidden");
+ let left=3-getCount();
+ document.getElementById("spinLeft").innerText="فاضلك: "+left+" لفات النهارده";
+ let btn=document.getElementById("spinBtn");
+ if(left<=0){btn.disabled=true;btn.innerText="خلصت 3 لفات - جرب بكرة 🎡";}
+ else {btn.disabled=false;btn.innerText=`🎡 لف العجلة ( فاضل ${left} )`;}
+ updatePrizeBox();
+}
+updateWheelUI();
 function spinWheel(){
+ if(!isUnlocked()){alert("اشتري باقة الأول عشان تفتح العجلة 🔒");return;}
  let c=getCount();
- if(c>=3){alert("خلصت 3 لفات النهارده");return;}
+ if(c>=3){alert("خلصت 3 لفات النهارده، جرب بكرة 🎡");return;}
  let btn=document.getElementById("spinBtn");btn.disabled=true;btn.innerText="جاري اللف...";
  let deg=360*5+Math.floor(Math.random()*360);
  document.getElementById("wheel").style.transform=`rotate(${deg}deg)`;
@@ -201,17 +261,16 @@ function spinWheel(){
   let prize=prizes[(8-idx)%8];
   allPrizes.push(prize);localStorage.setItem("hamo_wheel_prizes",JSON.stringify(allPrizes));
   localStorage.setItem("hamo_spin_"+todayKey(),c+1);
-  document.getElementById("wheelResult").innerText="🎉 كسبت: "+prize;
-  document.getElementById("spinLeft").innerText="فاضلك: "+(2-c)+" لفات";
-  btn.disabled=false;btn.innerText="🎡 لف العجلة";
+  document.getElementById("wheelResult").innerText="🎉 كسبت: "+prize+" - اتفعل على البطاقات ✅";
+  updateWheelUI();
+  btn.disabled=false;
  },4100);
 }
 function goWheelOrder(){
- let msg=`أهلا HAMO 🔥%0Aرقمي: ${userPhone}%0AID: ${userPubgId}%0A🎡 جوايز العجلة: ${allPrizes.join(" | ")}`;
+ let msg=`أهلا HAMO 🔥%0Aرقمي: ${userPhone}%0AID: ${userPubgId}%0A🎡 جوايز العجلة المفعلة: ${allPrizes.join(" | ")}`;
  window.open("https://wa.me/201103160633?text="+msg,"_blank");
 }
 if(userPubgId){document.getElementById("pubgId").value=userPubgId;document.getElementById("playerName").value=userPlayerName;document.getElementById("pubgIdLogin").value=userPubgId;}
-document.getElementById("spinLeft").innerText="فاضلك: "+(3-getCount())+" لفات";
 </script>
 </body>
 </html>
