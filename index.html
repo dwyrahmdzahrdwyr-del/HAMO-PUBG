@@ -8,7 +8,6 @@
 *{box-sizing:border-box}
 body{margin:0;background:#0b0b0f;color:#fff;font-family:Arial;text-align:center;padding:12px}
 .top{background:linear-gradient(90deg,#f5c518,#ff6b00);color:#000;padding:14px;border-radius:16px;font-weight:900;font-size:22px}
-.sub{color:#ccc;font-size:13px;margin:8px 0 14px}
 .card{background:#17171f;border:2px solid #f5c518;border-radius:18px;padding:16px;max-width:500px;margin:0 auto 14px}
 h3{margin:6px 0}
 button{width:100%;padding:14px;border:0;border-radius:12px;font-weight:900;margin-top:9px;cursor:pointer;font-size:16px}
@@ -39,14 +38,12 @@ input,select{width:100%;padding:13px;border-radius:12px;border:1px solid #444;ba
 
 <img src="hamo-banner.jpg" style="width:100%;max-width:500px;border-radius:16px;border:2px solid #f5c518;margin-bottom:12px">
 <div class="top">HAMO PUBG 🔥</div>
-<div class="sub">شحن شدات ببجي + عجلة الحظ 🎡 - مكسب 12%<br>واتساب: 01103160633 | تحويل: 01208398454</div>
 
-<!-- ===== التسجيل: رقم + ID ===== -->
+<!-- ===== التسجيل علطول: رقم + ID ===== -->
 <div id="loginScreen" class="card">
   <span class="badge">سجل دخول مرة واحدة - هيفضل محفوظ</span>
   <h3>📱 سجل دخول برقمك و ID ببجي</h3>
   <p class="small">سجل مرة واحدة بس، وبعد كده لو طلعت من الموقع ورجعت هتلاقي حسابك محفوظ على طول</p>
-
   <p class="small" style="text-align:right">1- اختار دولتك واكتب رقمك:</p>
   <div class="phone-row">
     <select id="countryCode">
@@ -71,17 +68,10 @@ input,select{width:100%;padding:13px;border-radius:12px;border:1px solid #444;ba
     <input id="phoneNum" type="tel" placeholder="اكتب رقمك من غير +20">
   </div>
   <p id="fullPhonePreview" class="small" style="color:#25D366">رقمك الكامل: +20 ...</p>
-
   <p class="small" style="text-align:right">2- اكتب ID ببجي بتاعك:</p>
-  <input id="pubgIdLogin" type="tel" placeholder="اكتب ID ببجي هنا - مثال: 5234567890">
+  <input id="pubgIdLogin" type="tel" placeholder="اكتب ID ببجي هنا">
   <input id="playerNameLogin" placeholder="اسمك في اللعبة (اختياري)">
-
-  <!-- الزرار الجديد: تسجيل -->
-  <button onclick="loginPhone()" style="background:#25D366;color:#fff">📱 تسجيل</button>
-  <input id="otpCode" type="tel" placeholder="اكتب كود الرسالة هنا" class="hidden">
-  <button id="verifyBtn" onclick="verifyCode()" style="background:#f5c518;color:#000" class="hidden">تأكيد التسجيل ✅</button>
-  <div id="recaptcha"></div>
-  <p id="loginStatus" style="color:#25D366;font-weight:800"></p>
+  <button onclick="registerNow()" style="background:#25D366;color:#fff">📱 تسجيل</button>
   <a href="https://wa.me/201103160633" target="_blank" style="display:block;background:#25D366;color:#fff;padding:13px;border-radius:12px;text-decoration:none;font-weight:900;margin-top:10px">💬 كلمنا واتساب: 01103160633</a>
 </div>
 
@@ -89,11 +79,8 @@ input,select{width:100%;padding:13px;border-radius:12px;border:1px solid #444;ba
 <div id="mainContent" class="card hidden">
   <p id="welcome" style="color:#25D366;font-weight:900"></p>
   <div id="savedInfo" class="saved"></div>
-
   <h3>💎 اختار باقة الشدات</h3>
-  <p class="small">السعر شامل مكسب 12%</p>
   <div id="packages"></div>
-
   <h3 style="margin-top:18px">🎮 بيانات الشحن - محفوظة</h3>
   <input id="pubgId" type="tel" placeholder="ID ببجي">
   <input id="playerName" placeholder="اسمك في اللعبة">
@@ -109,14 +96,18 @@ input,select{width:100%;padding:13px;border-radius:12px;border:1px solid #444;ba
   </div>
   <button onclick="buyNow()" style="background:#f5c518;color:#000;font-size:18px">اطلب دلوقتي على واتساب 📲 01103160633</button>
 
+  <!-- ===== العجلة زي ما قلت بالظبط ===== -->
   <div id="unlockBox" style="background:#0f0f14;border:1px dashed #f5c518;border-radius:14px;padding:12px;margin-top:16px">
     <h3>🔒 العجلة مقفولة</h3>
-    <p class="small">اشتري كارت الأول وبعدين اكتب كود الكارت</p>
-    <input id="cardCode" placeholder="اكتب كود الكارت هنا">
+    <p class="small">عشان تفتح العجلة لازم تشتري كارت الأول، بعد ما تشتري اكتب كود الكارت هنا</p>
+    <input id="cardCode" placeholder="اكتب كود الكارت اللي اشتريته هنا">
     <button onclick="unlockWheel()" style="background:#25D366;color:#fff">🔓 انا اشتريت كارت - افتح العجلة</button>
+    <p class="small">لو لسه مشتريتش، اطلب من فوق الأول وبعدين اكتب الكود<br>لشراء كارت كلم واتساب: 01103160633</p>
   </div>
+
   <div id="wheelBox" style="background:#0f0f14;border:1px solid #f5c518;border-radius:16px;padding:12px;margin-top:12px" class="locked">
     <h3>🎡 عجلة الحظ - 3 لفات كل يوم</h3>
+    <p class="small">بعد ما تشتري كارت، ليك 3 لفات في اليوم، لو خلصوا جرب بكرة</p>
     <div class="spin-count" id="spinCount">🔒 العجلة مقفولة - اشتري كارت الأول</div>
     <div class="wheel-wrap"><div class="pointer">👇</div><div id="wheel"></div></div>
     <p class="small">60 شدة | 10% خصم | 30 شدة | حظ أوفر | 5% خصم | 120 شدة | شحن مجاني | 15 شدة</p>
@@ -125,34 +116,16 @@ input,select{width:100%;padding:13px;border-radius:12px;border:1px solid #444;ba
     <p id="wheelWin" class="small" style="color:#25D366;font-weight:800"></p>
     <div id="myPrizes" style="text-align:right;font-size:14px"></div>
   </div>
+
   <button onclick="logout()" style="background:#333;color:#fff;margin-top:14px">تسجيل خروج - امسح حسابي من الجهاز</button>
-  <p class="small">لو دوست تسجيل خروج هتمسح الحفظ، ولازم تسجل تاني</p>
 </div>
 
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getAuth, RecaptchaVerifier, signInWithPhoneNumber, signOut, onAuthStateChanged, setPersistence, browserLocalPersistence } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-
-const firebaseConfig = {
-  apiKey: "AIzaSyAK1h7sk-GQ2hI94x1K_ZPZWEgGXOorcA0",
-  authDomain: "hamo-pubg.firebaseapp.com",
-  projectId: "hamo-pubg",
-  storageBucket: "hamo-pubg.firebasestorage.app",
-  messagingSenderId: "961554360466",
-  appId: "1:961554360466:web:41391ddd821ad1f26fde4b",
-  measurementId: "G-JCB8K0L9CB"
-};
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-await setPersistence(auth, browserLocalPersistence);
-
-let confirmationResult = null;
+<script>
 let userPhone = localStorage.getItem("hamo_phone") || "";
 let userPubgId = localStorage.getItem("hamo_pubg_id") || "";
 let userPlayerName = localStorage.getItem("hamo_player_name") || "";
 let wheelPrize = "بدون جايزة";
 let allPrizes = [];
-
 const PROFIT = 1.12;
 const items = [
   { uc: 60, cost: 45 },
@@ -177,7 +150,7 @@ function renderPackages(){
   });
   document.getElementById("packages").innerHTML = html;
 }
-window.selectPkg = (i) => { selectedIndex = i; selected = items[i]; renderPackages(); };
+function selectPkg(i){ selectedIndex = i; selected = items[i]; renderPackages(); }
 renderPackages();
 
 function getFullPhone(){
@@ -193,19 +166,11 @@ document.getElementById("phoneNum").addEventListener("input", () => {
 document.getElementById("countryCode").addEventListener("change", () => {
   document.getElementById("fullPhonePreview").innerText = "رقمك الكامل: " + getFullPhone();
 });
+if(userPhone) document.getElementById("phoneNum").value = userPhone.replace("+20","").replace("+966","").replace("+971","");
+if(userPubgId){ document.getElementById("pubgIdLogin").value = userPubgId; document.getElementById("pubgId").value = userPubgId; }
+if(userPlayerName){ document.getElementById("playerNameLogin").value = userPlayerName; document.getElementById("playerName").value = userPlayerName; }
 
-if(userPhone){
-  document.getElementById("phoneNum").value = userPhone.replace("+20","").replace("+966","").replace("+971","");
-}
-if(userPubgId){
-  document.getElementById("pubgIdLogin").value = userPubgId;
-  document.getElementById("pubgId").value = userPubgId;
-}
-if(userPlayerName){
-  document.getElementById("playerNameLogin").value = userPlayerName;
-  document.getElementById("playerName").value = userPlayerName;
-}
-
+// ===== العجلة: مقفولة - تتفتح بكارت - 3 لفات كل يوم =====
 function todayKey(){ return new Date().toISOString().slice(0,10); }
 function getSpinData(){
   let raw = localStorage.getItem("hamo_spin_" + todayKey());
@@ -234,7 +199,7 @@ if(localStorage.getItem("hamo_last_day") !== todayKey()){
   if(old.unlocked) saveSpinData({count:0, unlocked:true});
 }
 updateSpinUI();
-window.unlockWheel = () => {
+function unlockWheel(){
   let code = document.getElementById("cardCode").value.trim();
   if(code.length < 4){ alert("اكتب كود الكارت صح"); return; }
   localStorage.setItem("hamo_unlocked", "yes");
@@ -242,12 +207,12 @@ window.unlockWheel = () => {
   document.getElementById("unlockBox").innerHTML = "<h3 style='color:#25D366'>✅ مبروك! العجلة اتفتحت ليك</h3><p class='small'>ليك 3 لفات النهارده، الكود: " + code + "</p>";
   updateSpinUI();
   alert("مبروك 🎉 العجلة اتفتحت! ليك 3 لفات النهارده");
-};
+}
 if(localStorage.getItem("hamo_unlocked") === "yes"){
   document.getElementById("unlockBox").innerHTML = "<h3 style='color:#25D366'>✅ العجلة مفتوحة ليك - انت اشتريت كارت قبل كده</h3><p class='small'>ليك 3 لفات كل يوم</p>";
 }
 const prizes = ["60 شدة مجانا 🔥","خصم 10% 🎁","30 شدة مجانا 💎","حظ أوفر 😅","خصم 5% 🎁","120 شدة مجانا 🔥🔥","شحن مجاني 🚀","15 شدة مجانا ✨"];
-window.spinWheel = () => {
+function spinWheel(){
   let d = getSpinData();
   if(!d.unlocked){ alert("اشتري كارت الأول عشان تفتح العجلة 🔒"); return; }
   if(d.count >= 3){ alert("خلصت الـ 3 لفات بتوع النهارده، جرب بكرة 🎡"); updateSpinUI(); return; }
@@ -264,8 +229,7 @@ window.spinWheel = () => {
     document.getElementById("wheelWin").innerText = "الجايزة اتسجلت، هتتبعت مع طلبك على واتساب ✅ - فاضلك " + (3 - d.count) + " لفات النهارده";
     document.getElementById("myPrizes").innerHTML = "<b>جوايزك النهارده:</b><br>" + allPrizes.map(p => "• " + p).join("<br>");
   }, 4100);
-};
-
+}
 function showMain(phone, pubgId, playerName){
   userPhone = phone; userPubgId = pubgId; userPlayerName = playerName;
   localStorage.setItem("hamo_phone", phone);
@@ -280,52 +244,26 @@ function showMain(phone, pubgId, playerName){
   document.getElementById("playerName").value = playerName;
   window.scrollTo({top:0, behavior:"smooth"});
 }
-
 if(localStorage.getItem("hamo_logged") === "yes" && userPhone && userPubgId){
   showMain(userPhone, userPubgId, userPlayerName);
 }
-
-window.loginPhone = async () => {
+function registerNow(){
   let phone = getFullPhone();
   let pubgId = document.getElementById("pubgIdLogin").value.trim();
   let playerName = document.getElementById("playerNameLogin").value.trim();
   if(phone.length < 10){ alert("اكتب رقمك صح"); return; }
-  if(!pubgId){ alert("اكتب ID ببجي الأول - لازم ID مع الرقم"); return; }
-  localStorage.setItem("hamo_temp_pubg", pubgId);
-  localStorage.setItem("hamo_temp_name", playerName);
-  try{
-    if(!window.recaptchaVerifier) window.recaptchaVerifier = new RecaptchaVerifier(auth, "recaptcha", {size:"invisible"});
-    confirmationResult = await signInWithPhoneNumber(auth, phone, window.recaptchaVerifier);
-    document.getElementById("otpCode").classList.remove("hidden");
-    document.getElementById("verifyBtn").classList.remove("hidden");
-    document.getElementById("loginStatus").innerText = "بعتنا كود على " + phone + " - اكتبه فوق";
-  }catch(e){ alert("فعّل Phone الأول في Firebase: " + e.message); }
-};
-window.verifyCode = async () => {
-  let code = document.getElementById("otpCode").value.trim();
-  if(!code){ alert("اكتب الكود"); return; }
-  try{
-    let res = await confirmationResult.confirm(code);
-    let pubgId = localStorage.getItem("hamo_temp_pubg") || document.getElementById("pubgIdLogin").value;
-    let playerName = localStorage.getItem("hamo_temp_name") || "";
-    showMain(res.user.phoneNumber, pubgId, playerName);
-  }catch(e){ alert("الكود غلط"); }
-};
-window.logout = async () => {
+  if(!pubgId){ alert("اكتب ID ببجي الأول"); return; }
+  showMain(phone, pubgId, playerName);
+}
+function logout(){
   if(!confirm("متأكد عايز تمسح حسابك من الجهاز؟")) return;
-  await signOut(auth);
   localStorage.removeItem("hamo_logged");
   localStorage.removeItem("hamo_phone");
   localStorage.removeItem("hamo_pubg_id");
   localStorage.removeItem("hamo_player_name");
   location.reload();
-};
-onAuthStateChanged(auth, (u) => {
-  if(u && localStorage.getItem("hamo_logged") === "yes"){
-    showMain(u.phoneNumber || userPhone, userPubgId, userPlayerName);
-  }
-});
-window.buyNow = () => {
+}
+function buyNow(){
   let id = document.getElementById("pubgId").value.trim() || userPubgId;
   let pname = document.getElementById("playerName").value.trim() || userPlayerName;
   let pay = document.getElementById("payMethod").value;
@@ -335,9 +273,9 @@ window.buyNow = () => {
   let sell = sellPrice(selected);
   if(wheelPrize.includes("10%")) sell = Math.round(sell * 0.90);
   if(wheelPrize.includes("5%")) sell = Math.round(sell * 0.95);
-  let msg = `أهلا HAMO 🔥%0Aرقمي: ${userPhone}%0AID ببجي: ${id}%0Aالاسم: ${pname || "-"}%0Aعايز: ${selected.uc} شدة UC%0Aالسعر: ${sell} جنيه (مكسب 12%)%0A🎡 جوايز العجلة: ${allPrizes.join(" | ") || "لسه ملفش"}%0A${pay}%0Aحولت على: 01208398454%0Aممكن تأكيد؟`;
+  let msg = `أهلا HAMO 🔥%0Aرقمي: ${userPhone}%0AID ببجي: ${id}%0Aالاسم: ${pname || "-"}%0Aعايز: ${selected.uc} شدة UC%0Aالسعر: ${sell} جنيه%0A🎡 جوايز العجلة: ${allPrizes.join(" | ") || "لسه ملفش"}%0A${pay}%0Aحولت على: 01208398454%0Aممكن تأكيد؟`;
   window.open("https://wa.me/201103160633?text=" + msg, "_blank");
-};
+}
 </script>
 </body>
 </html>
