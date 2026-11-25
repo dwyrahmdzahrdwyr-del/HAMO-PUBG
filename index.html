@@ -76,9 +76,10 @@ input,select{width:100%;padding:13px;border-radius:12px;border:1px solid #444;ba
   <input id="pubgIdLogin" type="tel" placeholder="اكتب ID ببجي هنا - مثال: 5234567890">
   <input id="playerNameLogin" placeholder="اسمك في اللعبة (اختياري)">
 
-  <button onclick="loginPhone()" style="background:#25D366;color:#fff">📱 ابعتلي كود على رقمي</button>
+  <!-- الزرار الجديد: تسجيل -->
+  <button onclick="loginPhone()" style="background:#25D366;color:#fff">📱 تسجيل</button>
   <input id="otpCode" type="tel" placeholder="اكتب كود الرسالة هنا" class="hidden">
-  <button id="verifyBtn" onclick="verifyCode()" style="background:#f5c518;color:#000" class="hidden">تأكيد الكود ودخول ✅</button>
+  <button id="verifyBtn" onclick="verifyCode()" style="background:#f5c518;color:#000" class="hidden">تأكيد التسجيل ✅</button>
   <div id="recaptcha"></div>
   <p id="loginStatus" style="color:#25D366;font-weight:800"></p>
   <a href="https://wa.me/201103160633" target="_blank" style="display:block;background:#25D366;color:#fff;padding:13px;border-radius:12px;text-decoration:none;font-weight:900;margin-top:10px">💬 كلمنا واتساب: 01103160633</a>
@@ -143,7 +144,6 @@ const firebaseConfig = {
 };
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
-// ===== التسجيل يفضل محفوظ علطول حتى لو قفل المتصفح =====
 await setPersistence(auth, browserLocalPersistence);
 
 let confirmationResult = null;
@@ -180,7 +180,6 @@ function renderPackages(){
 window.selectPkg = (i) => { selectedIndex = i; selected = items[i]; renderPackages(); };
 renderPackages();
 
-// ===== رقم + دولة =====
 function getFullPhone(){
   let code = document.getElementById("countryCode").value;
   let num = document.getElementById("phoneNum").value.trim().replace(/\s/g,"");
@@ -195,7 +194,6 @@ document.getElementById("countryCode").addEventListener("change", () => {
   document.getElementById("fullPhonePreview").innerText = "رقمك الكامل: " + getFullPhone();
 });
 
-// لو كان مسجل قبل كده، املى البيانات لوحده
 if(userPhone){
   document.getElementById("phoneNum").value = userPhone.replace("+20","").replace("+966","").replace("+971","");
 }
@@ -208,7 +206,6 @@ if(userPlayerName){
   document.getElementById("playerName").value = userPlayerName;
 }
 
-// ===== العجلة 3 كل يوم بعد شراء كارت =====
 function todayKey(){ return new Date().toISOString().slice(0,10); }
 function getSpinData(){
   let raw = localStorage.getItem("hamo_spin_" + todayKey());
@@ -271,7 +268,6 @@ window.spinWheel = () => {
 
 function showMain(phone, pubgId, playerName){
   userPhone = phone; userPubgId = pubgId; userPlayerName = playerName;
-  // حفظ علطول
   localStorage.setItem("hamo_phone", phone);
   localStorage.setItem("hamo_pubg_id", pubgId);
   localStorage.setItem("hamo_player_name", playerName);
@@ -285,7 +281,6 @@ function showMain(phone, pubgId, playerName){
   window.scrollTo({top:0, behavior:"smooth"});
 }
 
-// لو مسجل قبل كده، يدخل على طول من غير كود
 if(localStorage.getItem("hamo_logged") === "yes" && userPhone && userPubgId){
   showMain(userPhone, userPubgId, userPlayerName);
 }
@@ -296,7 +291,6 @@ window.loginPhone = async () => {
   let playerName = document.getElementById("playerNameLogin").value.trim();
   if(phone.length < 10){ alert("اكتب رقمك صح"); return; }
   if(!pubgId){ alert("اكتب ID ببجي الأول - لازم ID مع الرقم"); return; }
-  // حفظ مؤقت قبل الكود
   localStorage.setItem("hamo_temp_pubg", pubgId);
   localStorage.setItem("hamo_temp_name", playerName);
   try{
@@ -336,7 +330,6 @@ window.buyNow = () => {
   let pname = document.getElementById("playerName").value.trim() || userPlayerName;
   let pay = document.getElementById("payMethod").value;
   if(!id){ alert("اكتب ID ببجي الأول"); return; }
-  // تحديث الحفظ لو غير ID
   localStorage.setItem("hamo_pubg_id", id);
   localStorage.setItem("hamo_player_name", pname);
   let sell = sellPrice(selected);
