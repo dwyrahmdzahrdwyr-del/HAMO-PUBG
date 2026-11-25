@@ -19,7 +19,6 @@ input,select{width:100%;padding:13px;border-radius:12px;border:1px solid #444;ba
 .pkg{background:#0f0f14;border:2px solid #333;border-radius:14px;padding:13px;margin-top:10px;display:flex;justify-content:space-between;align-items:center;cursor:pointer}
 .pkg.active{border-color:#f5c518;background:#221f0a}
 .price{color:#f5c518;font-weight:900;font-size:22px}
-.profit{color:#25D366;font-size:13px;font-weight:700}
 .small{color:#aaa;font-size:12px;line-height:1.6}
 .badge{background:#25D366;color:#000;font-size:12px;font-weight:900;padding:4px 10px;border-radius:20px;display:inline-block}
 .hidden{display:none!important}
@@ -83,7 +82,6 @@ input,select{width:100%;padding:13px;border-radius:12px;border:1px solid #444;ba
   <p id="welcome" style="color:#25D366;font-weight:900"></p>
   <div id="savedInfo" class="saved"></div>
   <h3>💎 اختار باقة الشدات</h3>
-  <p class="small">السعر شامل مكسب 12%</p>
   <div id="packages"></div>
   <h3 style="margin-top:18px">🎮 بيانات الشحن - محفوظة</h3>
   <input id="pubgId" type="tel" placeholder="ID ببجي">
@@ -133,27 +131,22 @@ input,select{width:100%;padding:13px;border-radius:12px;border:1px solid #444;ba
 let userPhone = localStorage.getItem("hamo_phone") || "";
 let userPubgId = localStorage.getItem("hamo_pubg_id") || "";
 let userPlayerName = localStorage.getItem("hamo_player_name") || "";
-// المكسب 12% برضو زي ما هو
-const PROFIT = 1.12;
 const items = [
-  { uc: 60, cost: 45 },
-  { uc: 325, cost: 220 },
-  { uc: 660, cost: 440 },
-  { uc: 1800, cost: 1150 },
-  { uc: 3850, cost: 2350 },
-  { uc: 8100, cost: 4700 },
+  { uc: 60, price: 50 },
+  { uc: 325, price: 246 },
+  { uc: 660, price: 493 },
+  { uc: 1800, price: 1288 },
+  { uc: 3850, price: 2632 },
+  { uc: 8100, price: 5264 },
 ];
 let selectedIndex = 1;
 let selected = items[selectedIndex];
-function sellPrice(item){ return Math.round(item.cost * PROFIT); }
 function renderPackages(){
   let html = "";
   items.forEach((it, i) => {
-    let sell = sellPrice(it);
-    let profit = sell - it.cost;
     html += `<div class="pkg ${i===selectedIndex?'active':''}" onclick="selectPkg(${i})">
-      <div style="text-align:right"><b>🔥 ${it.uc} UC شدة</b><br><span class="profit">مكسب 12%: ${profit} ج</span></div>
-      <div style="text-align:left"><div class="price">${sell} ج</div><span class="small">تكلفة ${it.cost}</span></div>
+      <div style="text-align:right"><b>🔥 ${it.uc} UC شدة</b></div>
+      <div style="text-align:left"><div class="price">${it.price} ج</div></div>
     </div>`;
   });
   document.getElementById("packages").innerHTML = html;
@@ -286,8 +279,7 @@ function buyNow(){
   if(!id){ alert("اكتب ID ببجي الأول"); return; }
   localStorage.setItem("hamo_pubg_id", id);
   localStorage.setItem("hamo_player_name", pname);
-  let sell = sellPrice(selected);
-  let msg = `أهلا HAMO 🔥%0Aرقمي: ${userPhone}%0AID ببجي: ${id}%0Aالاسم: ${pname || "-"}%0Aعايز: ${selected.uc} شدة UC%0Aالسعر: ${sell} جنيه (مكسب 12%)%0A🎡 جوايز العجلة: ${allPrizes.join(" | ") || "لسه ملفش"}%0A${pay}%0Aحولت على: 01208398454%0Aممكن تأكيد؟`;
+  let msg = `أهلا HAMO 🔥%0Aرقمي: ${userPhone}%0AID ببجي: ${id}%0Aالاسم: ${pname || "-"}%0Aعايز: ${selected.uc} شدة UC%0Aالسعر: ${selected.price} جنيه%0A🎡 جوايز العجلة: ${allPrizes.join(" | ") || "لسه ملفش"}%0A${pay}%0Aحولت على: 01208398454%0Aممكن تأكيد؟`;
   window.open("https://wa.me/201103160633?text=" + msg, "_blank");
 }
 </script>
