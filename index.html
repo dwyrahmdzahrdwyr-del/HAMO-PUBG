@@ -12,8 +12,11 @@ body{margin:0;background:#0b0b0f;color:#fff;font-family:Arial;text-align:center;
 .card{background:#17171f;border:2px solid #f5c518;border-radius:18px;padding:16px;max-width:500px;margin:0 auto 14px}
 h3{margin:6px 0}
 button{width:100%;padding:14px;border:0;border-radius:12px;font-weight:900;margin-top:9px;cursor:pointer;font-size:16px}
-button:disabled{opacity:.5;cursor:not-allowed}
+button:disabled{opacity:.5}
 input,select{width:100%;padding:13px;border-radius:12px;border:1px solid #444;background:#0f0f14;color:#fff;text-align:center;margin-top:9px;font-size:16px;outline:none}
+.phone-row{display:flex;gap:8px}
+.phone-row select{width:38%}
+.phone-row input{width:62%;margin-top:9px}
 .pkg{background:#0f0f14;border:2px solid #333;border-radius:14px;padding:13px;margin-top:10px;display:flex;justify-content:space-between;align-items:center;cursor:pointer}
 .pkg.active{border-color:#f5c518;background:#221f0a}
 .price{color:#f5c518;font-weight:900;font-size:20px}
@@ -33,21 +36,41 @@ input,select{width:100%;padding:13px;border-radius:12px;border:1px solid #444;ba
 </head>
 <body>
 
-<!-- صورة البطاقة الجديدة -->
 <img src="hamo-banner.jpg" style="width:100%;max-width:500px;border-radius:16px;border:2px solid #f5c518;margin-bottom:12px">
-
 <div class="top">HAMO PUBG 🔥</div>
 <div class="sub">شحن شدات ببجي + عجلة الحظ 🎡 - مكسب 12%<br>واتساب: 01103160633 | تحويل: 01208398454</div>
 
-<!-- ===== الدخول ===== -->
 <div id="loginScreen" class="card">
   <span class="badge">لازم تسجل دخول الأول</span>
   <h3>👋 أهلا بيك في متجر HAMO</h3>
-  <p class="small">سجل بفيسبوك أو جوجل أو رقم تليفونك عشان تشوف الباقات وتلف العجلة</p>
   <button onclick="loginGoogle()" style="background:#fff;color:#000">🔍 دخول بحساب جوجل Google</button>
   <button onclick="loginFacebook()" style="background:#1877F2;color:#fff">📘 دخول بحساب فيسبوك Facebook</button>
   <hr style="border-color:#333">
-  <input id="phoneNum" type="tel" placeholder="رقمك مثال: +201103160633">
+  <p class="small">📱 دخول برقم التليفون - اختار دولتك الأول</p>
+  <!-- اختيار الدولة -->
+  <div class="phone-row">
+    <select id="countryCode">
+      <option value="+20">🇪🇬 مصر +20</option>
+      <option value="+966">🇸🇦 السعودية +966</option>
+      <option value="+971">🇦🇪 الإمارات +971</option>
+      <option value="+965">🇰🇼 الكويت +965</option>
+      <option value="+974">🇶🇦 قطر +974</option>
+      <option value="+973">🇧🇭 البحرين +973</option>
+      <option value="+968">🇴🇲 عمان +968</option>
+      <option value="+962">🇯🇴 الأردن +962</option>
+      <option value="+961">🇱🇧 لبنان +961</option>
+      <option value="+963">🇸🇾 سوريا +963</option>
+      <option value="+964">🇮🇶 العراق +964</option>
+      <option value="+212">🇲🇦 المغرب +212</option>
+      <option value="+213">🇩🇿 الجزائر +213</option>
+      <option value="+216">🇹🇳 تونس +216</option>
+      <option value="+218">🇱🇾 ليبيا +218</option>
+      <option value="+249">🇸🇩 السودان +249</option>
+      <option value="+967">🇾🇪 اليمن +967</option>
+    </select>
+    <input id="phoneNum" type="tel" placeholder="اكتب رقمك من غير +20">
+  </div>
+  <p id="fullPhonePreview" class="small" style="color:#25D366">رقمك الكامل: +20 ...</p>
   <button onclick="loginPhone()" style="background:#25D366;color:#fff">📱 ابعتلي كود على رقمي</button>
   <input id="otpCode" type="tel" placeholder="اكتب كود الرسالة هنا" class="hidden">
   <button id="verifyBtn" onclick="verifyCode()" style="background:#f5c518;color:#000" class="hidden">تأكيد الكود ✅</button>
@@ -56,14 +79,11 @@ input,select{width:100%;padding:13px;border-radius:12px;border:1px solid #444;ba
   <a href="https://wa.me/201103160633" target="_blank" style="display:block;background:#25D366;color:#fff;padding:13px;border-radius:12px;text-decoration:none;font-weight:900;margin-top:10px">💬 كلمنا واتساب: 01103160633</a>
 </div>
 
-<!-- ===== الرئيسي ===== -->
 <div id="mainContent" class="card hidden">
   <p id="welcome" style="color:#25D366;font-weight:900"></p>
-
   <h3>💎 اختار باقة الشدات</h3>
-  <p class="small">السعر شامل مكسب 12% - السعر = التكلفة × 1.12</p>
+  <p class="small">السعر شامل مكسب 12%</p>
   <div id="packages"></div>
-
   <h3 style="margin-top:18px">🎮 بيانات الشحن</h3>
   <input id="pubgId" type="tel" placeholder="اكتب ID ببجي بتاعك هنا">
   <input id="playerName" placeholder="اسمك في اللعبة (اختياري)">
@@ -73,45 +93,33 @@ input,select{width:100%;padding:13px;border-radius:12px;border:1px solid #444;ba
     <option>💰 الدفع: محفظة</option>
   </select>
   <div class="pay">
-    <b>طريقة الدفع:</b><br>
     فودافون كاش للتحويل: <b>01208398454</b><br>
     واتساب للطلبات: <b>01103160633</b><br>
-    <span class="small">حول على 01208398454 وبعدين دوس اطلب على واتساب 01103160633 وابعت سكرين التحويل</span>
+    <span class="small">حول على 01208398454 وبعدين اطلب على واتساب 01103160633</span>
   </div>
   <button onclick="buyNow()" style="background:#f5c518;color:#000;font-size:18px">اطلب دلوقتي على واتساب 📲 01103160633</button>
-
-  <!-- ===== تفعيل العجلة بعد الشراء ===== -->
   <div id="unlockBox" style="background:#0f0f14;border:1px dashed #f5c518;border-radius:14px;padding:12px;margin-top:16px">
     <h3>🔒 العجلة مقفولة</h3>
-    <p class="small">عشان تفتح العجلة لازم تشتري كارت الأول، بعد ما تشتري اكتب كود الكارت هنا</p>
-    <input id="cardCode" placeholder="اكتب كود الكارت اللي اشتريته هنا">
+    <p class="small">اشتري كارت الأول وبعدين اكتب كود الكارت</p>
+    <input id="cardCode" placeholder="اكتب كود الكارت هنا">
     <button onclick="unlockWheel()" style="background:#25D366;color:#fff">🔓 انا اشتريت كارت - افتح العجلة</button>
-    <p class="small">لو لسه مشتريتش، اطلب من فوق الأول وبعدين اكتب الكود<br>لشراء كارت كلم واتساب: 01103160633</p>
   </div>
-
-  <!-- ===== العجلة ===== -->
   <div id="wheelBox" style="background:#0f0f14;border:1px solid #f5c518;border-radius:16px;padding:12px;margin-top:12px" class="locked">
     <h3>🎡 عجلة الحظ - 3 لفات كل يوم</h3>
-    <p class="small">بعد ما تشتري كارت، ليك 3 لفات في اليوم، لو خلصوا جرب بكرة</p>
     <div class="spin-count" id="spinCount">🔒 العجلة مقفولة - اشتري كارت الأول</div>
-    <div class="wheel-wrap">
-      <div class="pointer">👇</div>
-      <div id="wheel"></div>
-    </div>
+    <div class="wheel-wrap"><div class="pointer">👇</div><div id="wheel"></div></div>
     <p class="small">60 شدة | 10% خصم | 30 شدة | حظ أوفر | 5% خصم | 120 شدة | شحن مجاني | 15 شدة</p>
     <button id="spinBtn" onclick="spinWheel()" disabled style="background:linear-gradient(90deg,#f5c518,#ff6b00);color:#000;font-size:18px">🔒 العجلة مقفولة - اشتري كارت الأول</button>
     <p id="wheelResult"></p>
     <p id="wheelWin" class="small" style="color:#25D366;font-weight:800"></p>
     <div id="myPrizes" style="text-align:right;font-size:14px"></div>
   </div>
-
   <button onclick="logout()" style="background:#333;color:#fff;margin-top:14px">تسجيل خروج</button>
 </div>
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import { getAuth, GoogleAuthProvider, FacebookAuthProvider, RecaptchaVerifier, signInWithPopup, signInWithPhoneNumber, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-
 const firebaseConfig = {
   apiKey: "AIzaSyAK1h7sk-GQ2hI94x1K_ZPZWEgGXOorcA0",
   authDomain: "hamo-pubg.firebaseapp.com",
@@ -128,8 +136,6 @@ let userName = "زبون";
 let userLogin = "";
 let wheelPrize = "بدون جايزة";
 let allPrizes = [];
-
-// ===== الباقات - غير cost بس، البيع هيتحسب 12% لوحده =====
 const PROFIT = 1.12;
 const items = [
   { uc: 60, cost: 45 },
@@ -157,7 +163,21 @@ function renderPackages(){
 window.selectPkg = (i) => { selectedIndex = i; selected = items[i]; renderPackages(); };
 renderPackages();
 
-// ===== العجلة: 3 مرات كل يوم بعد الشراء =====
+// ===== اختيار الدولة + معاينة الرقم =====
+function getFullPhone(){
+  let code = document.getElementById("countryCode").value;
+  let num = document.getElementById("phoneNum").value.trim().replace(/\s/g,"");
+  if(num.startsWith("0")) num = num.slice(1);
+  if(num.startsWith(code)) num = num.slice(code.length);
+  return code + num;
+}
+document.getElementById("phoneNum").addEventListener("input", () => {
+  document.getElementById("fullPhonePreview").innerText = "رقمك الكامل: " + getFullPhone();
+});
+document.getElementById("countryCode").addEventListener("change", () => {
+  document.getElementById("fullPhonePreview").innerText = "رقمك الكامل: " + getFullPhone();
+});
+
 function todayKey(){ return new Date().toISOString().slice(0,10); }
 function getSpinData(){
   let raw = localStorage.getItem("hamo_spin_" + todayKey());
@@ -173,21 +193,12 @@ function updateSpinUI(){
   let box = document.getElementById("wheelBox");
   if(!d.unlocked){
     countEl.innerText = "🔒 العجلة مقفولة - اشتري كارت الأول";
-    btn.disabled = true;
-    btn.innerText = "🔒 العجلة مقفولة - اشتري كارت الأول";
-    box.classList.add("locked");
-    return;
+    btn.disabled = true; btn.innerText = "🔒 العجلة مقفولة - اشتري كارت الأول";
+    box.classList.add("locked"); return;
   }
   box.classList.remove("locked");
-  if(left <= 0){
-    countEl.innerText = "❌ خلصت الـ 3 لفات بتوع النهارده - جرب بكرة 🎡";
-    btn.disabled = true;
-    btn.innerText = "خلصت لفات النهارده - بكرة تاني";
-  } else {
-    countEl.innerText = `🎡 فاضلك ${left} لفات النهارده من 3`;
-    btn.disabled = false;
-    btn.innerText = `🎡 لف العجلة ( فاضل ${left} )`;
-  }
+  if(left <= 0){ countEl.innerText = "❌ خلصت الـ 3 لفات بتوع النهارده - جرب بكرة 🎡"; btn.disabled = true; btn.innerText = "خلصت لفات النهارده - بكرة تاني"; }
+  else { countEl.innerText = `🎡 فاضلك ${left} لفات النهارده من 3`; btn.disabled = false; btn.innerText = `🎡 لف العجلة ( فاضل ${left} )`; }
 }
 if(localStorage.getItem("hamo_last_day") !== todayKey()){
   localStorage.setItem("hamo_last_day", todayKey());
@@ -195,10 +206,9 @@ if(localStorage.getItem("hamo_last_day") !== todayKey()){
   if(old.unlocked) saveSpinData({count:0, unlocked:true});
 }
 updateSpinUI();
-
 window.unlockWheel = () => {
   let code = document.getElementById("cardCode").value.trim();
-  if(code.length < 4){ alert("اكتب كود الكارت صح، على الأقل 4 حروف / أرقام"); return; }
+  if(code.length < 4){ alert("اكتب كود الكارت صح"); return; }
   localStorage.setItem("hamo_unlocked", "yes");
   saveSpinData({count:0, unlocked:true});
   document.getElementById("unlockBox").innerHTML = "<h3 style='color:#25D366'>✅ مبروك! العجلة اتفتحت ليك</h3><p class='small'>ليك 3 لفات النهارده، الكود: " + code + "</p>";
@@ -208,32 +218,25 @@ window.unlockWheel = () => {
 if(localStorage.getItem("hamo_unlocked") === "yes"){
   document.getElementById("unlockBox").innerHTML = "<h3 style='color:#25D366'>✅ العجلة مفتوحة ليك - انت اشتريت كارت قبل كده</h3><p class='small'>ليك 3 لفات كل يوم</p>";
 }
-
 const prizes = ["60 شدة مجانا 🔥","خصم 10% 🎁","30 شدة مجانا 💎","حظ أوفر 😅","خصم 5% 🎁","120 شدة مجانا 🔥🔥","شحن مجاني 🚀","15 شدة مجانا ✨"];
 window.spinWheel = () => {
   let d = getSpinData();
   if(!d.unlocked){ alert("اشتري كارت الأول عشان تفتح العجلة 🔒"); return; }
   if(d.count >= 3){ alert("خلصت الـ 3 لفات بتوع النهارده، جرب بكرة 🎡"); updateSpinUI(); return; }
   let btn = document.getElementById("spinBtn");
-  btn.disabled = true;
-  btn.innerText = "جاري اللف... 🎡";
+  btn.disabled = true; btn.innerText = "جاري اللف... 🎡";
   let deg = 360 * 5 + Math.floor(Math.random() * 360);
   document.getElementById("wheel").style.transform = `rotate(${deg}deg)`;
   setTimeout(() => {
     let idx = Math.floor(((deg % 360) / 45)) % 8;
     let prize = prizes[(8 - idx) % 8];
-    wheelPrize = prize;
-    allPrizes.push(prize);
-    d.count += 1;
-    saveSpinData(d);
-    updateSpinUI();
+    wheelPrize = prize; allPrizes.push(prize);
+    d.count += 1; saveSpinData(d); updateSpinUI();
     document.getElementById("wheelResult").innerText = "🎉 مبروك! كسبت: " + prize;
     document.getElementById("wheelWin").innerText = "الجايزة اتسجلت، هتتبعت مع طلبك على واتساب ✅ - فاضلك " + (3 - d.count) + " لفات النهارده";
     document.getElementById("myPrizes").innerHTML = "<b>جوايزك النهارده:</b><br>" + allPrizes.map(p => "• " + p).join("<br>");
-    if(d.count >= 3) document.getElementById("wheelWin").innerText += " - خلصت لفات النهارده، بكرة تاني 🎡";
   }, 4100);
 };
-
 function showMain(name, login){
   userName = name; userLogin = login;
   document.getElementById("loginScreen").classList.add("hidden");
@@ -243,15 +246,15 @@ function showMain(name, login){
 }
 window.loginGoogle = async () => {
   try{ let res = await signInWithPopup(auth, new GoogleAuthProvider()); showMain(res.user.displayName || "زبون جوجل", res.user.email || "Google"); }
-  catch(e){ alert("فعّل Google الأول في Firebase > Authentication > Sign-in method"); }
+  catch(e){ alert("جوجل مش متفعل في Firebase: روح Authentication > Sign-in method > Google > Enable + ضيف الدومين في Authorized domains. الخطأ: " + e.message); }
 };
 window.loginFacebook = async () => {
   try{ let res = await signInWithPopup(auth, new FacebookAuthProvider()); showMain(res.user.displayName || "زبون فيسبوك", "Facebook"); }
-  catch(e){ alert("فيسبوك محتاج ربط تطبيق Meta، جوجل ورقم التليفون شغالين دلوقتي"); }
+  catch(e){ alert("فيسبوك مش متفعل: روح Firebase > Authentication > Sign-in method > Facebook وحط App ID و Secret + ضيف الدومين. الخطأ: " + e.message); }
 };
 window.loginPhone = async () => {
-  let phone = document.getElementById("phoneNum").value.trim();
-  if(!phone.startsWith("+")){ alert("اكتب الرقم بـ +20 مثال: +201103160633"); return; }
+  let phone = getFullPhone();
+  if(phone.length < 10){ alert("اكتب رقمك صح، مثال: 1103160633"); return; }
   try{
     if(!window.recaptchaVerifier) window.recaptchaVerifier = new RecaptchaVerifier(auth, "recaptcha", {size:"invisible"});
     confirmationResult = await signInWithPhoneNumber(auth, phone, window.recaptchaVerifier);
@@ -267,7 +270,6 @@ window.verifyCode = async () => {
 };
 window.logout = async () => { await signOut(auth); location.reload(); };
 onAuthStateChanged(auth, (u) => { if(u) showMain(u.displayName || u.phoneNumber || u.email || "زبون", u.email || u.phoneNumber || "مسجل"); });
-
 window.buyNow = () => {
   let id = document.getElementById("pubgId").value.trim();
   let pname = document.getElementById("playerName").value.trim();
@@ -276,9 +278,9 @@ window.buyNow = () => {
   let sell = sellPrice(selected);
   if(wheelPrize.includes("10%")) sell = Math.round(sell * 0.90);
   if(wheelPrize.includes("5%")) sell = Math.round(sell * 0.95);
-  let msg = `أهلا HAMO 🔥%0Aانا: ${userName}%0Aدخول بـ: ${userLogin}%0Aعايز: ${selected.uc} شدة UC%0Aالسعر: ${sell} جنيه (مكسب 12%)%0A🎡 جوايز العجلة: ${allPrizes.join(" | ") || "لسه ملفش - لازم اشتري كارت"}%0AID ببجي: ${id}%0Aالاسم: ${pname || "-"}%0A${pay}%0Aحولت على: 01208398454%0Aممكن تأكيد؟`;
+  let msg = `أهلا HAMO 🔥%0Aانا: ${userName}%0Aدخول بـ: ${userLogin}%0Aعايز: ${selected.uc} شدة UC%0Aالسعر: ${sell} جنيه (مكسب 12%)%0A🎡 جوايز العجلة: ${allPrizes.join(" | ") || "لسه ملفش"}%0AID ببجي: ${id}%0Aالاسم: ${pname || "-"}%0A${pay}%0Aحولت على: 01208398454%0Aممكن تأكيد؟`;
   window.open("https://wa.me/201103160633?text=" + msg, "_blank");
 };
 </script>
 </body>
-</html>
+  </html>
