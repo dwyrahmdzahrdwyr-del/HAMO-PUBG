@@ -1,48 +1,87 @@
-<!DOCTYPE html><html lang="ar" dir="rtl"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>HAMO PUBG</title><style>*{box-sizing:border-box;margin:0;padding:0}body{background:#0a0a0a;color:#fff;font-family:Arial;padding:12px}button{cursor:pointer}.header{display:flex;justify-content:space-between;background:#1c1c1c;padding:10px;border-radius:12px}.header button,.btn{background:#f5c518;border:0;padding:10px 12px;border-radius:8px;font-weight:700}.nav{display:flex;gap:8px;margin:12px 0}.nav button{flex:1;padding:12px;border:0;border-radius:10px;font-weight:700;background:#222;color:#fff}.nav button.active{background:#f5c518;color:#000}.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.card{border-radius:14px;text-align:center;border:1px solid #333;overflow:hidden}.card .info{background:#1c1c1c;padding:12px}.card button{background:#f5c518;border:0;padding:12px;border-radius:9px;font-weight:700;width:100%;margin-top:6px}.wheel-box{background:#1a1400;border:2px solid #f5c518;border-radius:16px;padding:16px;text-align:center;margin-top:16px}.wheel{width:200px;height:200px;border-radius:50%;margin:12px auto;border:6px solid #f5c518;transition:transform 3s;background:conic-gradient(#f5c518 0 45deg,#222 45deg 90deg,#e91e63 90deg 135deg,#222 135deg 180deg,#00b894 180deg 225deg,#222 225deg 270deg,#6c5ce7 270deg 315deg,#222 315deg 360deg);display:flex;align-items:center;justify-content:center;font-weight:700}input{width:100%;padding:12px;margin:8px 0;border-radius:9px;border:0;background:#fff;color:#000;font-size:16px;text-align:center}.btn{width:100%;margin-top:8px;font-size:16px}.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.92);align-items:center;justify-content:center;padding:16px;z-index:99}.modal>div{background:#1c1c1c;padding:20px;border-radius:14px;width:100%;max-width:380px;text-align:center}.paynum{background:#000;padding:12px;border-radius:9px;font-size:22px;font-weight:700;color:#f5c518;margin:10px 0}.payOpt{background:#2a2a2a;border:2px solid #333;padding:10px;border-radius:10px;flex:1;min-width:100px;cursor:pointer;text-align:center;font-weight:700}.payOpt.active{border-color:#f5c518;background:#3a2f00}.box{background:#1c1c1c;padding:14px;border-radius:12px;margin-top:12px}.cpn{background:#1a1400;border:2px dashed #f5c518;border-radius:12px;padding:12px;margin-bottom:10px;text-align:center}.code{background:#000;color:#f5c518;font-size:20px;font-weight:700;padding:8px;border-radius:8px;margin:8px 0}</style></head><body>
-<div class="header"><div id="u">👤 زائر</div><div style="display:flex;gap:6px"><button id="lo" style="display:none;background:#ff5252;color:#fff" onclick="logout()">خروج</button><button onclick="openLogin()">دخول</button></div></div>
-<h1 style="text-align:center;color:#f5c518;margin:10px 0">🎮 HAMO PUBG</h1>
-<div class="nav"><button id="tH" class="active" onclick="show('home')">🏠 المتجر</button><button id="tT" onclick="show('trans')">📋 معاملاتي</button><button id="tP" onclick="show('profile')">👤 حسابي</button></div>
-<div id="pageHome"><h2 style="text-align:center">💰 اختار الباقة</h2><div class="grid" id="pkgs"></div>
-<div class="wheel-box"><h2>🎡 عجلة الخصومات</h2><p style="font-size:13px;color:#ccc">3 لفات كل يوم - كل لفة خصم</p><div class="wheel" id="wheel">🎁 لف واكسب</div><p id="leftTxt"></p><button class="btn" onclick="spin()">لف العجلة 🎡</button><div id="wheelMsg" style="color:#f5c518;font-weight:700;margin-top:8px"></div><div id="winBox" style="display:none;background:#000;border:2px dashed #25D366;border-radius:12px;padding:12px;margin-top:10px"><div id="winCode" style="font-size:24px;font-weight:700;color:#25D366"></div><p id="winDesc"></p><button class="btn" style="background:#25D366" onclick="copyWin()">نسخ الكود 📋</button><button class="btn" onclick="useNow()">استخدمه دلوقتي 🛒</button></div></div>
-<div class="box"><h3 style="text-align:center">🎟️ أكوادي</h3><div id="myC"></div></div></div>
-<div id="pageTrans" style="display:none"><h2 style="text-align:center">📋 معاملاتي</h2><div class="box" style="display:flex;justify-content:space-between"><span>المعاملات: <b id="tc">0</b></span><span>الصرف: <b id="ts">0 ج</b></span></div><div id="tl"></div></div>
-<div id="pageProfile" style="display:none"><div class="box" style="text-align:center"><div style="font-size:50px">👤</div><h2 id="pn">زائر</h2><p id="pp"></p><p id="ps" style="color:#ff5252">مش مسجل دخول</p></div><div class="box"><h3>🎮 ID ببجي</h3><p>المحفوظ: <b id="saved" style="color:#f5c518">مش متسجل</b></p><input id="pubg" placeholder="اكتب ID ببجي"><button class="btn" onclick="saveId()">حفظ ID ✅</button><p style="font-size:12px;color:#aaa">جوايزك: <b id="myP" style="color:#25D366">لا يوجد</b></p></div><div class="box"><h3>🎟️ أكواد الخصم</h3><div id="proC"></div></div><div class="box"><button class="btn" style="background:#ff5252;color:#fff" onclick="logout()">خروج 🚪</button></div></div>
-<p style="text-align:center;color:#777;font-size:12px;margin:16px 0">HAMO STORE - الدفع على 01208398454</p>
-<div class="modal" id="loginM"><div><h2>دخول 🔐</h2><input id="ph" placeholder="رقم الموبايل 01xxxxxxxxx"><button class="btn" style="background:#25D366;color:#fff" onclick="loginPh()">ابعتلي كود SMS 📩</button><div style="margin:10px;color:#888">— أو —</div><div style="display:flex;gap:8px"><button class="btn" style="background:#fff" onclick="loginSoc('جوجل')">G Google</button><button class="btn" style="background:#1877F2;color:#fff" onclick="loginSoc('فيسبوك')">f Facebook</button></div><button class="btn" style="background:#333;color:#fff" onclick="closeM('loginM')">إلغاء</button></div></div>
-<div class="modal" id="otpM"><div><h2>🔐 كود التفعيل</h2><p>بعتنا كود على <b id="otpPh" style="color:#f5c518"></b></p><input id="otpIn" placeholder="اكتب الكود 6 أرقام" maxlength="6"><p>فاضل <span id="tm" style="color:#ff5252;font-weight:700">90</span> ثانية</p><button class="btn" onclick="verify()">تفعيل ✅</button><button class="btn" style="background:#333;color:#fff" id="reBtn" onclick="loginPh()" disabled>ابعت كود جديد</button><button class="btn" style="background:#222;color:#fff" onclick="closeM('otpM')">رجوع</button></div></div>
-<div class="modal" id="payM"><div><h3 id="payT">الدفع</h3><div id="s1"><p>ID: <b id="payId"></b></p><div style="background:#1a1400;border:2px dashed #f5c518;border-radius:10px;padding:10px;margin:10px 0"><p style="font-size:13px">🎟️ عندك كود خصم؟</p><div style="display:flex;gap:6px"><input id="cpnIn" placeholder="HAMO-1234" style="flex:1;margin:0"><button onclick="applyC()" style="background:#f5c518;border:0;padding:10px;border-radius:8px;font-weight:700">تطبيق ✅</button></div><p id="cpnMsg"></p><div id="cpnBox" style="display:none;background:#002a12;border:1px solid #25D366;padding:8px;border-radius:8px;font-size:13px"><span id="cpnTxt"></span><br>قبل: <s id="prB"></s> - بعد: <b id="prA" style="color:#25D366"></b></div></div><p>اختار طريقة الدفع:</p><div style="display:flex;gap:8px;flex-wrap:wrap;margin:10px 0" id="wallets"></div><p id="wCho" style="color:#f5c518">اختر طريقة الدفع</p><input id="wPh" placeholder="رقم المحفظة 01xxxxxxxxx"><button class="btn" onclick="sendPay()">تأكيد واظهار بيانات الدفع 📩</button><button class="btn" style="background:#333;color:#fff" onclick="closeM('payM')">إلغاء</button></div><div id="s2" style="display:none"><h3>📩 بيانات الدفع</h3><p>حول <b id="amt"></b><br><span id="disc" style="color:#25D366"></span><br>من <b id="wShow"></b></p><div class="paynum">01208398454</div><button class="btn" style="background:#fff" onclick="copyNum()">نسخ رقم الدفع 📋</button><button class="btn" style="background:#e60000;color:#fff;font-size:18px" onclick="openWallet()">💸 تحويل أموال الآن</button><p id="ussd" style="font-size:12px;color:#f5c518;margin-top:8px"></p><button class="btn" style="background:#333;color:#fff" onclick="closeM('payM')">تمام ✅</button></div></div></div>
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HAMO PUBG - شحن شدات</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#0a0a0a;color:#fff;font-family:Arial;padding:12px;padding-bottom:30px}
+.top{text-align:center;padding:10px}
+.top a{color:#f5c518;font-weight:bold;text-decoration:none}
+h1{text-align:center;color:#f5c518;font-size:26px}
+.sub{text-align:center;color:#ccc;font-size:14px;margin:6px 0 14px}
+.box{background:#1c1c1c;border:1px solid #f5c518;border-radius:14px;padding:14px;margin-bottom:14px}
+.box label{display:block;color:#f5c518;font-weight:700;margin-bottom:7px}
+.box input{width:100%;padding:14px;border-radius:10px;border:1px solid #444;background:#111;color:#fff;font-size:18px;text-align:center;font-weight:700}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.card{border-radius:14px;text-align:center;border:1px solid #333;overflow:hidden;background:#1c1c1c}
+.card .img{height:85px;display:flex;align-items:center;justify-content:center;font-size:42px}
+.card .info{padding:11px}
+.card h3{font-size:15px}
+.card .price{color:#f5c518;font-weight:800;font-size:17px;margin-top:4px}
+.card button{width:100%;padding:12px;border:0;border-radius:9px;background:#25D366;color:#fff;font-weight:800;margin-top:8px;cursor:pointer;font-size:15px}
+.pay{text-align:center;background:#f5c518;color:#000;border-radius:12px;padding:13px;margin-top:14px;font-weight:800;font-size:16px}
+.note{text-align:center;color:#aaa;font-size:13px;margin-top:10px;line-height:1.7}
+</style>
+</head>
+<body>
+
+<div class="top"><a href="index.html">⬅ رجوع لـ Tools</a></div>
+<h1>🎮 HAMO PUBG</h1>
+<p class="sub">اكتب ID ببجي بتاعك، وبعدين دوس على الباقة اللي عايزها</p>
+
+<div class="box">
+<label>🎯 اكتب ID ببجي بتاعك هنا الأول:</label>
+<input id="pubgId" type="tel" placeholder="مثال: 5123456789" inputmode="numeric">
+</div>
+
+<div class="grid" id="pkgs"></div>
+
+<div class="pay">💳 الدفع فودافون كاش: 01208398454</div>
+<p class="note">ابعت الفلوس على فودافون كاش وبعدين دوس على الباقة<br>الطلب هيجيلي على الواتساب بالـ ID بتاعك ✅</p>
+
 <script>
-let cur=null,wallet="فودافون كاش",user=null,otp="",otpExp=0,timer=null,pendPh="",pendPay=null,lastCode="",deg=0;
-try{let s=localStorage.getItem("hamoUser");if(s){let u=JSON.parse(s);if(u.verified)user=u}}catch(e){}
-let pkgs=[["60 شدة",50,"🔥","#ff6b00,#ffcc00"],["325 شدة",250,"💎","#00c6ff,#0072ff"],["660 شدة",490,"👑","#f7971e,#ffd200"],["1800 شدة",1300,"🚀","#8e2de2,#4a00e0"],["3850 شدة",2600,"⭐","#f857a6,#ff5858"],["8100 شدة",5100,"🏆","#11998e,#38ef7d"]];
-document.getElementById("pkgs").innerHTML=pkgs.map(p=>`<div class="card"><div style="height:110px;display:flex;align-items:center;justify-content:center;font-size:55px;background:linear-gradient(135deg,${p[3]})">${p[2]}</div><div class="info"><h3>${p[0]}</h3><p style="color:#f5c518;font-weight:700">${p[1]} ج</p><button onclick="openPay('${p[0]}',${p[1]})">اشتري وادفع</button></div></div>`).join("");
-let walls=["فودافون كاش","أورانج كاش","اتصالات كاش","انستا باي","فوري","محفظة بنكية"],em=["🟥","🟧","🟩","💳","🟡","🏦"];
-document.getElementById("wallets").innerHTML=walls.map((w,i)=>`<div class="payOpt" onclick="selW(this,'${w}')">${em[i]}<br>${w}</div>`).join("");
-let getC=()=>{try{return JSON.parse(localStorage.getItem("hamoCoupons")||"[]")}catch(e){return[]}},saveC=l=>{try{localStorage.setItem("hamoCoupons",JSON.stringify(l))}catch(e){}};
-let getT=()=>{try{return JSON.parse(localStorage.getItem("hamoTrans")||"[]")}catch(e){return[]}},addT=(t,a)=>{let l=getT();l.unshift({title:t,amount:a||0,date:new Date().toLocaleString('ar-EG')});try{localStorage.setItem("hamoTrans",JSON.stringify(l))}catch(e){}renderT()};
-function renderC(){let l=getC(),h="";if(!l.length)h="<p style='text-align:center;color:#888'>لسه مكسبتش - لف العجلة</p>";else h=l.map(c=>`<div class="cpn ${c.used?"couponUsed":""}"><b>${c.label}</b><div class="code">${c.code}</div><p style="font-size:12px;color:#aaa">${c.date}${c.used?" - تم استخدامه":" - ساري"}</p>${c.used?"":`<button class="btn" style="background:#25D366" onclick="copyC('${c.code}')">نسخ 📋</button>`}</div>`).join("");document.getElementById("myC").innerHTML=h;document.getElementById("proC").innerHTML=h}
-function renderT(){let l=getT(),tot=0;l.forEach(x=>tot+=x.amount);document.getElementById("tc").innerText=l.length;document.getElementById("ts").innerText=tot+" ج";document.getElementById("tl").innerHTML=l.length?l.map(x=>`<div class="box" style="display:flex;justify-content:space-between"><div><b>${x.title}</b><br><small style="color:#aaa">${x.date}</small></div><b style="color:#f5c518">${x.amount?x.amount+" ج":"-"}</b></div>`).join(""):"<p style='text-align:center;color:#888;padding:20px'>لسه مفيش معاملات</p>"}
-function showUser(){if(!user)return;document.getElementById("u").innerText="👤 "+user.name+" | "+user.phone+" ✅";document.getElementById("lo").style.display="block";document.getElementById("pn").innerText=user.name;document.getElementById("pp").innerText=user.phone;document.getElementById("ps").innerText="✅ حساب موثق";document.getElementById("ps").style.color="#25D366";if(user.pubgId){document.getElementById("saved").innerText=user.pubgId;document.getElementById("pubg").value=user.pubgId}document.getElementById("myP").innerText=user.prize||"لا يوجد"}
-if(user)showUser();renderT();renderC();
-function show(p){["pageHome","pageTrans","pageProfile"].forEach((id,i)=>document.getElementById(id).style.display=(["home","trans","profile"][i]==p)?"block":"none");document.getElementById("tH").className=p=="home"?"active":"";document.getElementById("tT").className=p=="trans"?"active":"";document.getElementById("tP").className=p=="profile"?"active":"";if(p=="trans")renderT();if(p=="profile")renderC()}
-function openLogin(){if(user&&user.verified){show("profile");return}document.getElementById("loginM").style.display="flex"}
-function closeM(id){document.getElementById(id).style.display="none";if(id=="otpM"&&timer)clearInterval(timer)}
-function okLogin(n,ph){user={name:n,phone:ph,pubgId:user&&user.pubgId?user.pubgId:"",prize:user&&user.prize?user.prize:"",verified:true};try{localStorage.setItem("hamoUser",JSON.stringify(user))}catch(e){}showUser();addT("تسجيل دخول ✅",0);closeM("loginM");closeM("otpM");alert("تم الدخول ✅ أهلا "+n);if(pendPay){let pp=pendPay;pendPay=null;setTimeout(()=>openPay(pp.name,pp.price),400)}}
-function loginPh(){let p=document.getElementById("ph").value.trim();if(p.length<11){alert("اكتب رقم صح");return}pendPh=p;otp=Math.floor(100000+Math.random()*900000).toString();otpExp=Date.now()+90000;document.getElementById("otpPh").innerText=p;document.getElementById("otpIn").value="";document.getElementById("reBtn").disabled=true;closeM("loginM");document.getElementById("otpM").style.display="flex";if(timer)clearInterval(timer);timer=setInterval(()=>{let l=Math.ceil((otpExp-Date.now())/1000);if(l<=0){document.getElementById("tm").innerText="0";document.getElementById("reBtn").disabled=false;clearInterval(timer);return}document.getElementById("tm").innerText=l},1000);alert("كود SMS على "+p+" - الكود: "+otp+" (للتجربة)")}
-function verify(){let e=document.getElementById("otpIn").value.trim();if(Date.now()>otpExp){alert("الكود انتهى");return}if(e!=otp){alert("الكود غلط");return}clearInterval(timer);okLogin("عميل HAMO",pendPh)}
-function loginSoc(s){let n=prompt("اكتب اسمك عشان ندخلك بـ "+s,"عميل HAMO");if(!n)return;okLogin(n,"مسجل بـ "+s)}
-function logout(){if(!confirm("متأكد؟"))return;try{localStorage.removeItem("hamoUser")}catch(e){}user=null;document.getElementById("u").innerText="👤 زائر";document.getElementById("lo").style.display="none";show("home")}
-function saveId(){if(!user){alert("سجل دخول الأول");openLogin();return}let id=document.getElementById("pubg").value.trim();if(!id){alert("اكتب ID");return}user.pubgId=id;try{localStorage.setItem("hamoUser",JSON.stringify(user))}catch(e){}document.getElementById("saved").innerText=id;alert("تم حفظ ID: "+id)}
-function openPay(n,pr){if(!user||!user.verified){alert("سجل دخول الأول");pendPay={name:n,price:pr};openLogin();return}if(!user.pubgId){alert("اكتب ID ببجي الأول");show("profile");return}cur={name:n,originalPrice:pr,price:pr,coupon:null,code:""};document.getElementById("payT").innerText="ادفع: "+n+" - "+pr+" ج";document.getElementById("payId").innerText=user.pubgId;document.getElementById("cpnIn").value="";document.getElementById("cpnMsg").innerText="";document.getElementById("cpnBox").style.display="none";document.getElementById("s1").style.display="block";document.getElementById("s2").style.display="none";document.getElementById("payM").style.display="flex"}
-function applyC(){let code=document.getElementById("cpnIn").value.trim().toUpperCase();if(!code){alert("اكتب الكود");return}let f=getC().find(x=>x.code==code);if(!f){document.getElementById("cpnMsg").innerText="❌ الكود غلط";document.getElementById("cpnMsg").style.color="#ff5252";return}if(f.used){document.getElementById("cpnMsg").innerText="❌ اتستخدم قبل كده";document.getElementById("cpnMsg").style.color="#ff5252";return}let d=0;if(f.type=="percent")d=Math.round(cur.originalPrice*f.value/100);if(f.type=="fixed")d=f.value;if(f.type=="free")d=cur.originalPrice;if(d>cur.originalPrice)d=cur.originalPrice;cur.price=cur.originalPrice-d;cur.coupon=f;cur.code=code;document.getElementById("cpnMsg").innerText="✅ وفرت "+d+" ج";document.getElementById("cpnMsg").style.color="#25D366";document.getElementById("cpnBox").style.display="block";document.getElementById("cpnTxt").innerText="🎟️ "+f.label+" - "+code;document.getElementById("prB").innerText=cur.originalPrice+" ج";document.getElementById("prA").innerText=cur.price+" ج";document.getElementById("payT").innerText="ادفع: "+cur.name+" - "+cur.price+" ج بعد الخصم";alert("تم الخصم ✅ هتدفع "+cur.price+" ج")}
-function selW(el,w){document.querySelectorAll(".payOpt").forEach(x=>x.classList.remove("active"));el.classList.add("active");wallet=w;document.getElementById("wCho").innerText="اخترت: "+w}
-function sendPay(){let wp=document.getElementById("wPh").value.trim();if(wp.length<11){alert("اكتب رقم المحفظة");return}document.getElementById("wShow").innerText=wallet+" - "+wp;document.getElementById("amt").innerText=cur.price+" ج لباقة "+cur.name;if(cur.coupon){document.getElementById("disc").innerText="✅ خصم "+cur.coupon.label+" - "+cur.code;let l=getC();l.forEach(x=>{if(x.code==cur.code)x.used=true});saveC(l);renderC()}else document.getElementById("disc").innerText="";document.getElementById("s1").style.display="none";document.getElementById("s2").style.display="block";addT("طلب "+cur.name+" - "+wallet,cur.price)}
-function copyNum(){try{navigator.clipboard.writeText("01208398454")}catch(e){}alert("تم نسخ: 01208398454")}
-function copyC(c){try{navigator.clipboard.writeText(c)}catch(e){}alert("تم نسخ: "+c)}
-function copyWin(){copyC(lastCode)}
-function useNow(){if(!user){alert("سجل دخول");openLogin();return}if(!user.pubgId){alert("اكتب ID");show("profile");return}openPay("60 شدة",50);setTimeout(()=>{document.getElementById("cpnIn").value=lastCode;applyC()},400)}
-function openWallet(){let a=cur.price,to="01208398454";if(wallet.includes("فودافون")){document.getElementById("ussd").innerText="فودافون: *9*7*"+to+"*"+a+"#";setTimeout(()=>window.location.href="tel:"+encodeURIComponent("*9*7*"+to+"*"+a+"#"),200)}else if(wallet.includes("أورانج")){document.getElementById("ussd").innerText="أورانج: *777*1*"+to+"*"+a+"#";setTimeout(()=>window.location.href="tel:"+encodeURIComponent("*777*1*"+to+"*"+a+"#"),200)}else if(wallet.includes("اتصالات")){window.location.href="tel:"+encodeURIComponent("*777*1*"+to+"*"+a+"#")}else if(wallet.includes("انستا")){window.location.href="instapay://transfer?phone="+to+"&amount="+a}else{window.location.href="tel:"+encodeURIComponent("*9*7*"+to+"*"+a+"#")}}
-let wheelD={date:new Date().toDateString(),count:0};try{let t=JSON.parse(localStorage.getItem("hamoWheel")||"{}");if(t.date==wheelD.date)wheelD=t}catch(e){}
-function updL(){document.getElementById("leftTxt").innerText="فاضلك: "+(3-wheelD.count)+" لفات"}updL();
-function spin(){if(!user||!user.verified){alert("سجل دخول الأول");openLogin();return}if(!user.pubgId){alert("اكتب ID");show("profile");return}if(wheelD.count>=3){alert("خلصت 3 لفات");return}let pr=[{label:"خصم 5%",type:"percent",value:5},{label:"خصم 10%",type:"percent",value:10},{label:"خصم 15%",type:"percent",value:15},{label:"خصم 20%",type:"percent",value:20},{label:"خصم 30%",type:"percent",value:30},{label:"خصم 50%",type:"percent",value:50},{label:"خصم 100 جنيه",type:"fixed",value:100},{label:"60 شدة مجانية",type:"free",value:0}];let idx=Math.floor(Math.random()*8);deg+=1440+idx*45+20;document.getElementById("wheel").style.transform="rotate("+deg+"deg)";document.getElementById("wheelMsg").innerText="بتلف...";document.getElementById("winBox").style.display="none";wheelD.count++;try{localStorage.setItem("hamoWheel",JSON.stringify(wheelD))}catch(e){}setTimeout(()=>{let p=pr[idx],code="HAMO-"+Math.floor(1000+Math.random()*9000),cp={code,label:p.label,type:p.type,value:p.value,date:new Date().toLocaleDateString("ar-EG"),used:false};let l=getC();l.unshift(cp);saveC(l);renderC();lastCode=code;document.getElementById("wheelMsg").innerText="🎉 مبروك: "+p.label;document.getElementById("winCode").innerText=code;document.getElementById("winDesc").innerText=p.label;document.getElementById("winBox").style.display="block";updL();user.prize=p.label+" - "+code;try{localStorage.setItem("hamoUser",JSON.stringify(user))}catch(e){}document.getElementById("myP").innerText=user.prize;addT("كسبت: "+p.label+" - "+code,0);alert("🎉 مبروك: "+p.label+"\nكودك: "+code)},3100)}
-</script></body></html>
+// أسعار HAMO = سعر Carry1st + 10 جنيه
+let pkgs=[
+["60 UC",60,"🔥","#ff6b00,#ffcc00"],
+["325 UC",260,"💎","#00c6ff,#0072ff"],
+["660 UC",511,"👑","#f7971e,#ffd200"],
+["1800 UC",1372,"🚀","#8e2de2,#4a00e0"],
+["3850 UC",2544,"⭐","#f857a6,#ff5858"],
+["8100 UC",5077,"🏆","#11998e,#38ef7d"],
+["16200 UC",10146,"💰","#f83600,#f9d423"],
+["24300 UC",15215,"💎","#2193b0,#6dd5ed"],
+["32400 UC",20283,"👑","#834d9b,#d04ed6"],
+["40500 UC",25352,"🔥","#fc4a1a,#f7b733"]
+];
+
+document.getElementById("pkgs").innerHTML = pkgs.map(p=>`
+<div class="card">
+<div class="img" style="background:linear-gradient(135deg,${p[3]})">${p[2]}</div>
+<div class="info">
+<h3>${p[0]}</h3>
+<p class="price">${p[1]} ج</p>
+<button onclick="sendOrder('${p[0]}',${p[1]})">اطلب دي 📲</button>
+</div>
+</div>
+`).join("");
+
+function sendOrder(name, price){
+  let id = document.getElementById("pubgId").value.trim();
+  if(!id || id.length < 5){
+    alert("اكتب ID ببجي بتاعك فوق الأول ❌");
+    document.getElementById("pubgId").focus();
+    return;
+  }
+  let msg = `طلب جديد من HAMO PUBG 🎮%0A%0A` +
+  `الباقة: ${name}%0A` +
+  `السعر: ${price} جنيه%0A` +
+  `ID ببجي: ${id}%0A` +
+  `الدفع: فودافون كاش 01208398454%0A%0A` +
+  `انا اخترت الباقة دي وبعت الفلوس، اشحنلي لو سمحت`;
+  window.open("https://wa.me/201208398454?text=" + msg, "_blank");
+}
+</script>
+</body>
+</html>
