@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>HAMO PUBG | شحن شدات</title>
+<title>HAMO PUBG | شحن شدات + عجلة الحظ</title>
 <style>
 *{box-sizing:border-box}
 body{margin:0;background:#0b0b0f;color:#fff;font-family:Arial;text-align:center;padding:12px;padding-bottom:80px}
@@ -11,6 +11,7 @@ body{margin:0;background:#0b0b0f;color:#fff;font-family:Arial;text-align:center;
 .card{background:#17171f;border:2px solid #f5c518;border-radius:18px;padding:16px;max-width:500px;margin:0 auto 14px}
 h3{margin:6px 0}
 button{width:100%;padding:14px;border:0;border-radius:12px;font-weight:900;margin-top:9px;cursor:pointer;font-size:16px}
+button:disabled{opacity:.5}
 input,select{width:100%;padding:13px;border-radius:12px;border:1px solid #444;background:#0f0f14;color:#fff;text-align:center;margin-top:9px;font-size:16px;outline:none}
 .phone-row{display:flex;gap:8px}
 .phone-row select{width:38%}
@@ -25,16 +26,25 @@ input,select{width:100%;padding:13px;border-radius:12px;border:1px solid #444;ba
 .pay{border:1px solid #333;border-radius:12px;padding:10px;margin-top:8px;text-align:right;font-size:14px}
 .pay b{color:#f5c518}
 .saved{background:#0f2a1a;border:1px solid #25D366;border-radius:12px;padding:10px;margin-top:10px;font-size:14px}
+.locked{opacity:.6;filter:grayscale(.4)}
+.wheel-wrap{position:relative;width:260px;height:260px;margin:14px auto}
+#wheel{width:260px;height:260px;border-radius:50%;border:6px solid #f5c518;transition:transform 4s cubic-bezier(.17,.67,.21,1);background:conic-gradient(#f5c518 0 45deg,#111 45deg 90deg,#ff6b00 90deg 135deg,#25D366 135deg 180deg,#1877F2 180deg 225deg,#e91e63 225deg 270deg,#9c27b0 270deg 315deg,#333 315deg 360deg)}
+.pointer{position:absolute;top:-8px;left:50%;transform:translateX(-50%);font-size:32px;z-index:2}
+#wheelResult{font-weight:900;color:#f5c518;font-size:17px;min-height:24px}
+.spin-count{background:#000;border:1px solid #f5c518;border-radius:20px;padding:6px 12px;display:inline-block;font-weight:900;margin:6px 0}
 .wheel-btn{position:fixed;left:10px;top:50%;transform:translateY(-50%);z-index:999;width:62px;height:62px;border-radius:50%;background:linear-gradient(135deg,#f5c518,#ff6b00);color:#000;font-size:28px;border:3px solid #fff;box-shadow:0 4px 20px rgba(0,0,0,.6);cursor:pointer;display:flex;align-items:center;justify-content:center;animation:pulse 1.5s infinite}
 @keyframes pulse{0%{transform:translateY(-50%) scale(1)}50%{transform:translateY(-50%) scale(1.1)}100%{transform:translateY(-50%) scale(1)}}
 .wheel-label{position:fixed;left:8px;top:calc(50% + 40px);z-index:999;background:#000;color:#f5c518;font-size:11px;font-weight:900;padding:3px 8px;border-radius:20px;border:1px solid #f5c518}
+#wheelPage{position:fixed;inset:0;background:#0b0b0f;z-index:1000;overflow-y:auto;padding:12px;display:none}
+#wheelPage.show{display:block}
 </style>
 </head>
 <body>
 <img src="hamo-banner.jpg" style="width:100%;max-width:500px;border-radius:16px;border:2px solid #f5c518;margin-bottom:12px">
 <div class="top">HAMO PUBG 🔥</div>
-<button class="wheel-btn" onclick="location.href='wheel.html'">🎡</button>
+<button class="wheel-btn" onclick="openWheel()">🎡</button>
 <div class="wheel-label">عجلة الحظ</div>
+<div id="homePage">
 <div id="loginScreen" class="card" style="margin-top:12px">
   <span class="badge">سجل دخول مرة واحدة - هيفضل محفوظ</span>
   <h3>📱 سجل دخول برقمك و ID ببجي</h3>
@@ -73,6 +83,7 @@ input,select{width:100%;padding:13px;border-radius:12px;border:1px solid #444;ba
   <p id="welcome" style="color:#25D366;font-weight:900"></p>
   <div id="savedInfo" class="saved"></div>
   <h3>💎 اختار باقة الشدات</h3>
+  <p class="small">السعر شامل مكسب 12%</p>
   <div id="packages"></div>
   <h3 style="margin-top:18px">🎮 بيانات الشحن - محفوظة</h3>
   <input id="pubgId" type="tel" placeholder="ID ببجي">
@@ -88,13 +99,41 @@ input,select{width:100%;padding:13px;border-radius:12px;border:1px solid #444;ba
     <span class="small">حول على 01208398454 وبعدين اطلب على واتساب 01103160633</span>
   </div>
   <button onclick="buyNow()" style="background:#f5c518;color:#000;font-size:18px">اطلب دلوقتي على واتساب 📲 01103160633</button>
-  <button onclick="location.href='wheel.html'" style="background:linear-gradient(90deg,#f5c518,#ff6b00);color:#000">🎡 جرب عجلة الحظ - 3 لفات كل يوم</button>
+  <button onclick="openWheel()" style="background:linear-gradient(90deg,#f5c518,#ff6b00);color:#000">🎡 جرب عجلة الحظ - 3 لفات كل يوم</button>
   <button onclick="logout()" style="background:#333;color:#fff;margin-top:14px">تسجيل خروج - امسح حسابي من الجهاز</button>
+</div>
+</div>
+<div id="wheelPage">
+<img src="hamo-banner.jpg" style="width:100%;max-width:500px;border-radius:16px;border:2px solid #f5c518;margin-bottom:12px">
+<div class="top">🎡 عجلة الحظ - HAMO</div>
+<div class="card" style="margin-top:12px">
+  <button onclick="closeWheel()" style="background:#333;color:#fff">⬅ ارجع للموقع الرئيسي</button>
+  <div id="unlockBox" style="background:#0f0f14;border:1px dashed #f5c518;border-radius:14px;padding:12px;margin-top:12px">
+    <h3>🔒 العجلة مقفولة</h3>
+    <p class="small">عشان تفتح العجلة لازم تشتري كارت الأول، بعد ما تشتري اكتب كود الكارت هنا</p>
+    <input id="cardCode" placeholder="اكتب كود الكارت اللي اشتريته هنا">
+    <button onclick="unlockWheel()" style="background:#25D366;color:#fff">🔓 انا اشتريت كارت - افتح العجلة</button>
+    <p class="small">لشراء كارت كلم واتساب: 01103160633</p>
+  </div>
+  <div id="wheelBox" style="background:#0f0f14;border:1px solid #f5c518;border-radius:16px;padding:12px;margin-top:12px" class="locked">
+    <h3>🎡 عجلة الحظ - 3 لفات كل يوم</h3>
+    <p class="small">أعلى مكسب في العجلة: 2% خصم أو 3 شدات فقط</p>
+    <div class="spin-count" id="spinCount">🔒 العجلة مقفولة - اشتري كارت الأول</div>
+    <div class="wheel-wrap"><div class="pointer">👇</div><div id="wheel"></div></div>
+    <p class="small">3 شدات | 2% خصم | 1 شدة | حظ أوفر | 2 شدة | 1% خصم | حظ أوفر | 3 شدات</p>
+    <button id="spinBtn" onclick="spinWheel()" disabled style="background:linear-gradient(90deg,#f5c518,#ff6b00);color:#000;font-size:18px">🔒 العجلة مقفولة - اشتري كارت الأول</button>
+    <p id="wheelResult"></p>
+    <p id="wheelWin" class="small" style="color:#25D366;font-weight:800"></p>
+    <div id="myPrizes" style="text-align:right;font-size:14px"></div>
+    <button onclick="goOrder()" style="background:#25D366;color:#fff">اطلب دلوقتي بالجايزة على واتساب 📲</button>
+  </div>
+</div>
 </div>
 <script>
 let userPhone = localStorage.getItem("hamo_phone") || "";
 let userPubgId = localStorage.getItem("hamo_pubg_id") || "";
 let userPlayerName = localStorage.getItem("hamo_player_name") || "";
+// المكسب 12% برضو زي ما هو
 const PROFIT = 1.12;
 const items = [
   { uc: 60, cost: 45 },
@@ -113,7 +152,7 @@ function renderPackages(){
     let sell = sellPrice(it);
     let profit = sell - it.cost;
     html += `<div class="pkg ${i===selectedIndex?'active':''}" onclick="selectPkg(${i})">
-      <div style="text-align:right"><b>🔥 ${it.uc} UC شدة</b><br><span class="profit">مكسب: ${profit} ج</span></div>
+      <div style="text-align:right"><b>🔥 ${it.uc} UC شدة</b><br><span class="profit">مكسب 12%: ${profit} ج</span></div>
       <div style="text-align:left"><div class="price">${sell} ج</div><span class="small">تكلفة ${it.cost}</span></div>
     </div>`;
   });
@@ -170,6 +209,76 @@ function logout(){
   localStorage.removeItem("hamo_player_name");
   location.reload();
 }
+function openWheel(){ document.getElementById("wheelPage").classList.add("show"); window.scrollTo({top:0}); updateSpinUI(); }
+function closeWheel(){ document.getElementById("wheelPage").classList.remove("show"); }
+function todayKey(){ return new Date().toISOString().slice(0,10); }
+function getSpinData(){
+  let raw = localStorage.getItem("hamo_spin_" + todayKey());
+  if(!raw) return { count: 0, unlocked: localStorage.getItem("hamo_unlocked") === "yes" };
+  return JSON.parse(raw);
+}
+function saveSpinData(d){ localStorage.setItem("hamo_spin_" + todayKey(), JSON.stringify(d)); }
+function updateSpinUI(){
+  let d = getSpinData();
+  let left = 3 - d.count;
+  let countEl = document.getElementById("spinCount");
+  let btn = document.getElementById("spinBtn");
+  let box = document.getElementById("wheelBox");
+  if(!d.unlocked){
+    countEl.innerText = "🔒 العجلة مقفولة - اشتري كارت الأول";
+    btn.disabled = true; btn.innerText = "🔒 العجلة مقفولة - اشتري كارت الأول";
+    box.classList.add("locked"); return;
+  }
+  box.classList.remove("locked");
+  if(left <= 0){ countEl.innerText = "❌ خلصت الـ 3 لفات بتوع النهارده - جرب بكرة 🎡"; btn.disabled = true; btn.innerText = "خلصت لفات النهارده - بكرة تاني"; }
+  else { countEl.innerText = `🎡 فاضلك ${left} لفات النهارده من 3`; btn.disabled = false; btn.innerText = `🎡 لف العجلة ( فاضل ${left} )`; }
+}
+if(localStorage.getItem("hamo_last_day") !== todayKey()){
+  localStorage.setItem("hamo_last_day", todayKey());
+  let old = getSpinData();
+  if(old.unlocked) saveSpinData({count:0, unlocked:true});
+}
+updateSpinUI();
+function unlockWheel(){
+  let code = document.getElementById("cardCode").value.trim();
+  if(code.length < 4){ alert("اكتب كود الكارت صح"); return; }
+  localStorage.setItem("hamo_unlocked", "yes");
+  saveSpinData({count:0, unlocked:true});
+  document.getElementById("unlockBox").innerHTML = "<h3 style='color:#25D366'>✅ مبروك! العجلة اتفتحت ليك</h3><p class='small'>ليك 3 لفات النهارده، الكود: " + code + "</p>";
+  updateSpinUI();
+  alert("مبروك 🎉 العجلة اتفتحت! ليك 3 لفات النهارده");
+}
+if(localStorage.getItem("hamo_unlocked") === "yes"){
+  document.getElementById("unlockBox").innerHTML = "<h3 style='color:#25D366'>✅ العجلة مفتوحة ليك - انت اشتريت كارت قبل كده</h3><p class='small'>ليك 3 لفات كل يوم</p>";
+}
+const prizes = ["3 شدات 🔥","خصم 2% 🎁","1 شدة ✨","حظ أوفر 😅","2 شدة 💎","خصم 1% 🎁","حظ أوفر 😅","3 شدات 🔥"];
+let allPrizes = JSON.parse(localStorage.getItem("hamo_wheel_prizes") || "[]");
+if(allPrizes.length) document.getElementById("myPrizes").innerHTML = "<b>جوايزك:</b><br>" + allPrizes.map(p => "• " + p).join("<br>");
+function spinWheel(){
+  let d = getSpinData();
+  if(!d.unlocked){ alert("اشتري كارت الأول عشان تفتح العجلة 🔒"); return; }
+  if(d.count >= 3){ alert("خلصت الـ 3 لفات بتوع النهارده، جرب بكرة 🎡"); updateSpinUI(); return; }
+  let btn = document.getElementById("spinBtn");
+  btn.disabled = true; btn.innerText = "جاري اللف... 🎡";
+  let deg = 360 * 5 + Math.floor(Math.random() * 360);
+  document.getElementById("wheel").style.transform = `rotate(${deg}deg)`;
+  setTimeout(() => {
+    let idx = Math.floor(((deg % 360) / 45)) % 8;
+    let prize = prizes[(8 - idx) % 8];
+    allPrizes.push(prize);
+    localStorage.setItem("hamo_wheel_prizes", JSON.stringify(allPrizes));
+    d.count += 1; saveSpinData(d); updateSpinUI();
+    document.getElementById("wheelResult").innerText = "🎉 مبروك! كسبت: " + prize;
+    document.getElementById("wheelWin").innerText = "الجايزة اتسجلت، هتتبعت مع طلبك على واتساب ✅ - فاضلك " + (3 - d.count) + " لفات النهارده";
+    document.getElementById("myPrizes").innerHTML = "<b>جوايزك:</b><br>" + allPrizes.map(p => "• " + p).join("<br>");
+  }, 4100);
+}
+function goOrder(){
+  let phone = localStorage.getItem("hamo_phone") || userPhone;
+  let id = localStorage.getItem("hamo_pubg_id") || userPubgId;
+  let msg = `أهلا HAMO 🔥%0Aرقمي: ${phone}%0AID ببجي: ${id}%0A🎡 جوايز العجلة: ${allPrizes.join(" | ")}%0Aعايز اطلب بالجايزة دي`;
+  window.open("https://wa.me/201103160633?text=" + msg, "_blank");
+}
 function buyNow(){
   let id = document.getElementById("pubgId").value.trim() || userPubgId;
   let pname = document.getElementById("playerName").value.trim() || userPlayerName;
@@ -178,8 +287,7 @@ function buyNow(){
   localStorage.setItem("hamo_pubg_id", id);
   localStorage.setItem("hamo_player_name", pname);
   let sell = sellPrice(selected);
-  let prizes = JSON.parse(localStorage.getItem("hamo_wheel_prizes") || "[]");
-  let msg = `أهلا HAMO 🔥%0Aرقمي: ${userPhone}%0AID ببجي: ${id}%0Aالاسم: ${pname || "-"}%0Aعايز: ${selected.uc} شدة UC%0Aالسعر: ${sell} جنيه%0A🎡 جوايز العجلة: ${prizes.join(" | ") || "لسه ملفش"}%0A${pay}%0Aحولت على: 01208398454%0Aممكن تأكيد؟`;
+  let msg = `أهلا HAMO 🔥%0Aرقمي: ${userPhone}%0AID ببجي: ${id}%0Aالاسم: ${pname || "-"}%0Aعايز: ${selected.uc} شدة UC%0Aالسعر: ${sell} جنيه (مكسب 12%)%0A🎡 جوايز العجلة: ${allPrizes.join(" | ") || "لسه ملفش"}%0A${pay}%0Aحولت على: 01208398454%0Aممكن تأكيد؟`;
   window.open("https://wa.me/201103160633?text=" + msg, "_blank");
 }
 </script>
