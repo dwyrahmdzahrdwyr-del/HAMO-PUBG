@@ -7,59 +7,45 @@
 <style>
 *{box-sizing:border-box}
 body{margin:0;background:#0f0f1a;color:#fff;font-family:Arial;text-align:center;padding-bottom:90px}
-.top{background:linear-gradient(135deg,#1a1a2e,#16213e);padding:14px 14px 10px;position:sticky;top:0;z-index:10;box-shadow:0 4px 20px rgba(0,0,0,.4);border-bottom:1px solid #2a2a4a}
+.top{background:#1a1a2e;padding:14px;position:sticky;top:0;z-index:10;border-bottom:1px solid #2a2a4a}
 .top1{display:flex;justify-content:space-between;align-items:center;gap:8px}
-.logo{font-weight:900;font-size:22px;white-space:nowrap}
-.logo span{background:linear-gradient(90deg,#f5c518,#ff6b00);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.login-btn{background:linear-gradient(135deg,#f5c518,#ff6b00);color:#000;border:0;padding:10px 14px;border-radius:12px;font-weight:900;font-size:14px;cursor:pointer;white-space:nowrap}
-.icons{font-size:20px;display:flex;gap:12px}
+.logo{font-weight:900;font-size:22px}.logo span{color:#f5c518}
+.login-btn{background:#f5c518;color:#000;border:0;padding:11px 14px;border-radius:12px;font-weight:900;font-size:14px;cursor:pointer}
+.icons{font-size:20px;display:flex;gap:12px}.icons span{cursor:pointer}
 .search{display:flex;gap:8px;margin-top:12px}
-.search input{flex:1;padding:13px 14px;border-radius:14px;border:1px solid #2a2a4a;background:#1a1a2e;color:#fff;text-align:right;font-size:14px;outline:none}
-.search button{width:50px;border:0;border-radius:14px;background:linear-gradient(135deg,#f5c518,#ff6b00);font-size:18px;cursor:pointer}
+.search input{flex:1;padding:13px;border-radius:14px;border:1px solid #2a2a4a;background:#1a1a2e;color:#fff;text-align:right;outline:none}
+.search button{width:50px;border:0;border-radius:14px;background:#f5c518;font-size:18px;cursor:pointer}
 .cats{display:flex;gap:8px;overflow-x:auto;padding:12px;white-space:nowrap}
 .cats button{border:1px solid #2a2a4a;border-radius:20px;padding:9px 16px;background:#1a1a2e;color:#ccc;font-weight:900;cursor:pointer;white-space:nowrap}
-.cats button.active{background:linear-gradient(135deg,#f5c518,#ff6b00);color:#000;border:0}
-.sec{padding:0 14px;text-align:right}
-.sec h3{margin:12px 0 8px;font-size:18px}
-.sec p{color:#888;font-size:12px;margin:0 0 8px}
+.cats button.active{background:#f5c518;color:#000;border:0}
+.sec{padding:0 14px;text-align:right}.sec h3{margin:12px 0 4px;font-size:18px}.sec p{color:#888;font-size:12px;margin:0 0 8px}
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:0 14px}
-.card2{background:linear-gradient(180deg,#1e1e32,#151525);border:1px solid #2a2a4a;border-radius:18px;overflow:hidden;text-align:center;box-shadow:0 8px 24px rgba(0,0,0,.3);position:relative}
+.card2{background:#1e1e32;border:1px solid #2a2a4a;border-radius:18px;overflow:hidden;text-align:center;position:relative}
 .card2.hot{border:2px solid #f5c518}
 .card2 .img{height:105px;display:flex;align-items:center;justify-content:center;font-size:58px;color:#fff}
-.c1 .img{background:linear-gradient(135deg,#ff9d00,#ff5e00)}
-.c2 .img{background:linear-gradient(135deg,#38b6ff,#0077ff)}
-.c3 .img{background:linear-gradient(135deg,#ffd700,#ffaa00)}
-.c4 .img{background:linear-gradient(135deg,#a855f7,#4c1d95)}
-.c5 .img{background:linear-gradient(135deg,#ff5e8a,#ff2d55)}
-.c6 .img{background:linear-gradient(135deg,#2dd4a8,#00a86b)}
-.card2 b{display:block;margin:10px 0 2px;font-size:16px}
-.card2 .price{color:#f5c518;font-weight:900;font-size:17px;margin:4px 0 2px}
-.card2 .after{font-size:12px;color:#25D366;font-weight:900;min-height:16px}
-.card2 button{background:linear-gradient(135deg,#f5c518,#ff6b00);color:#000;border:0;width:calc(100% - 16px);padding:12px;border-radius:12px;font-weight:900;margin:6px 8px 10px;cursor:pointer}
+.c1 .img{background:linear-gradient(135deg,#ff9d00,#ff5e00)}.c2 .img{background:linear-gradient(135deg,#38b6ff,#0077ff)}.c3 .img{background:linear-gradient(135deg,#ffd700,#ffaa00)}.c4 .img{background:linear-gradient(135deg,#a855f7,#4c1d95)}.c5 .img{background:linear-gradient(135deg,#ff5e8a,#ff2d55)}.c6 .img{background:linear-gradient(135deg,#2dd4a8,#00a86b)}
+.card2 b{display:block;margin:10px 0 2px;font-size:16px}.card2 .price{color:#f5c518;font-weight:900;font-size:17px}.card2 .after{font-size:12px;color:#25D366;font-weight:900;min-height:16px}
+.card2 button{background:#f5c518;color:#000;border:0;width:calc(100% - 16px);padding:12px;border-radius:12px;font-weight:900;margin:6px 8px 10px;cursor:pointer}
 .badge{position:absolute;top:8px;left:8px;background:#f5c518;color:#000;font-size:11px;font-weight:900;padding:4px 8px;border-radius:20px}
 .card{background:#1a1a2e;border:1px solid #2a2a4a;border-radius:18px;padding:16px;margin:14px;text-align:center}
 .card input,.card select{width:100%;padding:13px;border-radius:12px;border:1px solid #2a2a4a;background:#0f0f1a;color:#fff;text-align:center;margin-top:9px;font-size:16px;outline:none}
 .btn{width:100%;padding:14px;border:0;border-radius:12px;font-weight:900;margin-top:9px;cursor:pointer;font-size:16px}
 .hidden{display:none!important}
 .bottom{position:fixed;bottom:0;left:0;right:0;background:#1a1a2e;display:flex;border-top:1px solid #2a2a4a;padding:10px 0;z-index:20}
-.bottom button{flex:1;border:0;background:none;font-size:12px;cursor:pointer;color:#888;line-height:1.4}
-.bottom button.active{color:#f5c518;font-weight:900}
-.bottom button i{display:block;font-size:20px}
-.pay{border:1px solid #2a2a4a;border-radius:12px;padding:12px;margin-top:8px;line-height:2}
-.pay b{display:block;font-size:19px;direction:ltr;color:#f5c518}
+.bottom button{flex:1;border:0;background:none;font-size:12px;cursor:pointer;color:#888;line-height:1.4}.bottom button.active{color:#f5c518;font-weight:900}.bottom button i{display:block;font-size:20px}
+.pay{border:1px solid #2a2a4a;border-radius:12px;padding:12px;margin-top:8px;line-height:2}.pay b{display:block;font-size:19px;direction:ltr;color:#f5c518}
 .small{color:#888;font-size:12px;line-height:1.7}
 .locked-box{background:#fff7e6;border:1px dashed #f5c518;border-radius:12px;padding:12px;margin:10px 0;color:#111}
 .prize-active{background:#0f2a1a;border:1px solid #25D366;border-radius:12px;padding:10px;margin:10px 14px;font-size:14px;color:#7CFC9A}
-.wheel-box{background:linear-gradient(180deg,#2a1a00,#1a1a2e);border:2px solid #f5c518;border-radius:22px;padding:18px;margin:14px;box-shadow:0 0 30px rgba(245,197,24,.25)}
+.wheel-box{background:linear-gradient(180deg,#2a1a00,#1a1a2e);border:2px solid #f5c518;border-radius:22px;padding:18px;margin:14px}
 .wheel-wrap{position:relative;width:260px;height:260px;margin:16px auto}
-.wheel-outer{position:absolute;inset:0;border-radius:50%;background:conic-gradient(#f5c518 0 45deg,#ff6b00 45deg 90deg,#25D366 90deg 135deg,#1877F2 135deg 180deg,#e91e63 180deg 225deg,#9c27b0 225deg 270deg,#00bcd4 270deg 315deg,#333 315deg 360deg);border:6px solid #fff;box-shadow:0 0 0 6px #f5c518,0 10px 30px rgba(0,0,0,.5);transition:transform 4s cubic-bezier(.17,.67,.21,1)}
-.wheel-label{position:absolute;top:50%;left:50%;width:110px;text-align:center;font-size:12px;font-weight:900;color:#fff;text-shadow:0 1px 3px #000;line-height:1.2;transform-origin:0 0;pointer-events:none}
+.wheel-outer{position:absolute;inset:0;border-radius:50%;background:conic-gradient(#f5c518 0 45deg,#ff6b00 45deg 90deg,#25D366 90deg 135deg,#1877F2 135deg 180deg,#e91e63 180deg 225deg,#9c27b0 225deg 270deg,#00bcd4 270deg 315deg,#333 315deg 360deg);border:6px solid #fff;box-shadow:0 0 0 6px #f5c518;transition:transform 4s cubic-bezier(.17,.67,.21,1)}
+.wheel-label{position:absolute;top:50%;left:50%;width:110px;text-align:center;font-size:12px;font-weight:900;color:#fff;text-shadow:0 1px 3px #000;transform-origin:0 0;pointer-events:none}
 .wheel-center{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:70px;height:70px;background:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:28px;z-index:5;border:4px solid #f5c518}
 .pointer{position:absolute;top:-10px;left:50%;transform:translateX(-50%);font-size:32px;z-index:10}
 .modal{position:fixed;inset:0;background:rgba(0,0,0,.75);display:flex;align-items:flex-end;justify-content:center;z-index:100}
 .modal-box{background:#1a1a2e;width:100%;max-width:480px;border-radius:22px 22px 0 0;padding:18px;text-align:center}
-.pay-opt{display:flex;gap:10px;margin-top:12px}
-.pay-opt button{flex:1;padding:14px 6px;border-radius:14px;border:1px solid #2a2a4a;cursor:pointer;font-weight:900;font-size:13px;line-height:1.5}
+.pay-opt{display:flex;gap:10px;margin-top:12px}.pay-opt button{flex:1;padding:14px 6px;border-radius:14px;border:1px solid #2a2a4a;cursor:pointer;font-weight:900;font-size:13px;line-height:1.5}
 </style>
 </head>
 <body>
@@ -67,46 +53,41 @@ body{margin:0;background:#0f0f1a;color:#fff;font-family:Arial;text-align:center;
 <div class="top">
 <div class="top1">
 <div class="logo">HAMO <span>STORE</span> 🎮</div>
-<!-- زرار تسجيل الدخول - باين فوق -->
-<button class="login-btn" onclick="showPage('account')" id="loginBtn">دخول / تسجيل 🔑</button>
-<div class="icons"><span onclick="showPage('cart')">🛒</span><span>🔔</span></div>
+<button type="button" class="login-btn" onclick="window.showPage('account')">دخول / تسجيل 🔑</button>
+<div class="icons"><span onclick="window.showPage('cart')">🛒</span><span>🔔</span></div>
 </div>
-<div class="search"><input id="searchInput" placeholder="🔍 ابحث عن باقة..." oninput="doSearch()"><button>🔍</button></div>
+<div class="search"><input id="searchInput" placeholder="🔍 ابحث عن باقة..." oninput="window.doSearch()"><button type="button" onclick="window.doSearch()">🔍</button></div>
 </div>
 
 <div class="cats">
-<button class="active" onclick="filterCat('all',this)">الكل</button>
-<button onclick="filterCat('store',this)">متجر</button>
-<button onclick="showPage('wheel')">مسابقات</button>
-<button onclick="showPage('orders')">طلباتي</button>
-<button onclick="showPage('account')">حسابي</button>
+<button type="button" class="active" onclick="window.filterCat(this)">الكل</button>
+<button type="button" onclick="window.filterCat(this)">متجر</button>
+<button type="button" onclick="window.showPage('wheel')">مسابقات</button>
+<button type="button" onclick="window.showPage('orders')">طلباتي</button>
+<button type="button" onclick="window.showPage('account')">حسابي</button>
 </div>
 
 <div id="page-store">
 <div class="sec"><h3>شحن الشدات - PUBG 🔥</h3><p>مكسب العجلة بيتفعل على البطاقات هنا في نفس الصفحة</p></div>
 <div id="activePrizeBox"></div>
-
-<!-- البطاقات - مكتوبة ثابتة عشان متختفيش تاني -->
 <div class="grid" id="grid">
-<div class="card2 c1" data-name="60 شدة" data-index="0"><div class="img">🔥</div><b class="uc-text">60 شدة</b><div class="price">EGP 55.59</div><div class="after"></div><button onclick="buyPkg(0)">اشتري وادفع</button></div>
-<div class="card2 c2 hot" data-name="325 شدة" data-index="1"><span class="badge">الأكثر مبيعا 🔥</span><div class="img">💎</div><b class="uc-text">325 شدة</b><div class="price">EGP 280.21</div><div class="after"></div><button onclick="buyPkg(1)">اشتري وادفع</button></div>
-<div class="card2 c3" data-name="660 شدة" data-index="2"><div class="img">👑</div><b class="uc-text">660 شدة</b><div class="price">EGP 561.00</div><div class="after"></div><button onclick="buyPkg(2)">اشتري وادفع</button></div>
-<div class="card2 c4" data-name="1800 شدة" data-index="3"><div class="img">🚀</div><b class="uc-text">1800 شدة</b><div class="price">EGP 1,525.38</div><div class="after"></div><button onclick="buyPkg(3)">اشتري وادفع</button></div>
-<div class="card2 c5" data-name="3850 شدة" data-index="4"><div class="img">⭐</div><b class="uc-text">3850 شدة</b><div class="price">EGP 2,837.79</div><div class="after"></div><button onclick="buyPkg(4)">اشتري وادفع</button></div>
-<div class="card2 c6" data-name="8100 شدة" data-index="5"><div class="img">🏆</div><b class="uc-text">8100 شدة</b><div class="price">EGP 6,103.38</div><div class="after"></div><button onclick="buyPkg(5)">اشتري وادفع</button></div>
+<div class="card2 c1" data-name="60 شدة" data-index="0"><div class="img">🔥</div><b class="uc-text">60 شدة</b><div class="price">EGP 55.59</div><div class="after"></div><button type="button" onclick="window.buyPkg(0)">اشتري وادفع</button></div>
+<div class="card2 c2 hot" data-name="325 شدة" data-index="1"><span class="badge">الأكثر مبيعا 🔥</span><div class="img">💎</div><b class="uc-text">325 شدة</b><div class="price">EGP 280.21</div><div class="after"></div><button type="button" onclick="window.buyPkg(1)">اشتري وادفع</button></div>
+<div class="card2 c3" data-name="660 شدة" data-index="2"><div class="img">👑</div><b class="uc-text">660 شدة</b><div class="price">EGP 561.00</div><div class="after"></div><button type="button" onclick="window.buyPkg(2)">اشتري وادفع</button></div>
+<div class="card2 c4" data-name="1800 شدة" data-index="3"><div class="img">🚀</div><b class="uc-text">1800 شدة</b><div class="price">EGP 1,525.38</div><div class="after"></div><button type="button" onclick="window.buyPkg(3)">اشتري وادفع</button></div>
+<div class="card2 c5" data-name="3850 شدة" data-index="4"><div class="img">⭐</div><b class="uc-text">3850 شدة</b><div class="price">EGP 2,837.79</div><div class="after"></div><button type="button" onclick="window.buyPkg(4)">اشتري وادفع</button></div>
+<div class="card2 c6" data-name="8100 شدة" data-index="5"><div class="img">🏆</div><b class="uc-text">8100 شدة</b><div class="price">EGP 6,103.38</div><div class="after"></div><button type="button" onclick="window.buyPkg(5)">اشتري وادفع</button></div>
 </div>
 
 <div class="wheel-box">
 <h3 style="margin:0">🎡 عجلة الحظ - لف واكسب</h3>
 <p class="small">ليك 3 لفات بس كل يوم - بس بعد ما تشتري</p>
 <div id="wheelLockBox" class="locked-box">
-<b>🔒 العجلة مقفولة</b><br>
-<span class="small">اشتري أي باقة الأول عشان تتفتح ليك 3 لفات النهارده</span><br>
-<button class="btn" onclick="document.getElementById('grid').scrollIntoView({behavior:'smooth'})" style="background:#f5c518">🛒 اشتري الأول وافتح العجلة</button>
+<b>🔒 العجلة مقفولة</b><br><span class="small">اشتري أي باقة الأول عشان تتفتح ليك 3 لفات النهارده</span><br>
+<button type="button" class="btn" onclick="document.getElementById('grid').scrollIntoView({behavior:'smooth'})" style="background:#f5c518">🛒 اشتري الأول وافتح العجلة</button>
 </div>
 <div id="wheelPlayBox" class="hidden">
-<div class="wheel-wrap">
-<div class="pointer">⬇️</div>
+<div class="wheel-wrap"><div class="pointer">⬇️</div>
 <div id="wheel" class="wheel-outer">
 <div class="wheel-label" style="transform:rotate(22deg) translate(68px,-8px)">🔥 3 شدات</div>
 <div class="wheel-label" style="transform:rotate(67deg) translate(68px,-8px)">🎁 خصم 2%</div>
@@ -116,15 +97,13 @@ body{margin:0;background:#0f0f1a;color:#fff;font-family:Arial;text-align:center;
 <div class="wheel-label" style="transform:rotate(247deg) translate(68px,-8px)">🎁 خصم 1%</div>
 <div class="wheel-label" style="transform:rotate(292deg) translate(68px,-8px)">😅 حظ أوفر</div>
 <div class="wheel-label" style="transform:rotate(337deg) translate(68px,-8px)">🔥 3 شدات</div>
-</div>
-<div class="wheel-center">🎁</div>
-</div>
-<p id="wheelResult" style="color:#f5c518;font-weight:900;font-size:16px"></p>
+</div><div class="wheel-center">🎁</div></div>
+<p id="wheelResult" style="color:#f5c518;font-weight:900"></p>
 <p id="spinLeft" style="font-weight:900">فاضلك: 3 لفات</p>
 <p id="spinUsed" class="small"></p>
-<button class="btn" onclick="spinWheel()" id="spinBtn" style="background:linear-gradient(135deg,#f5c518,#ff6b00)">🎡 لف العجلة</button>
+<button type="button" class="btn" onclick="window.spinWheel()" id="spinBtn" style="background:#f5c518">🎡 لف العجلة</button>
 <div id="myPrizesBox"></div>
-<button class="btn" onclick="goWheelOrder()" style="background:#25D366;color:#fff">اطلب بالجايزة على واتساب 📲</button>
+<button type="button" class="btn" onclick="window.goWheelOrder()" style="background:#25D366;color:#fff">اطلب بالجايزة على واتساب 📲</button>
 </div>
 </div>
 
@@ -139,179 +118,116 @@ body{margin:0;background:#0f0f1a;color:#fff;font-family:Arial;text-align:center;
 
 <div id="page-account" class="card hidden">
 <h3>👤 حسابي - دخول / تسجيل</h3>
-<p class="small" id="loginHint">سجل مرة واحدة - هيفضل محفوظ</p>
 <input id="phoneNum" placeholder="رقمك">
 <input id="pubgIdLogin" placeholder="ID ببجي">
 <input id="playerNameLogin" placeholder="اسمك في اللعبة">
-<button class="btn" onclick="registerNow()" style="background:#25D366;color:#fff">📱 تسجيل دخول</button>
+<button type="button" class="btn" onclick="window.registerNow()" style="background:#25D366;color:#fff">📱 تسجيل دخول</button>
 <p id="accInfo" class="small"></p>
-<button class="btn" onclick="logout()" style="background:#333;color:#fff">تسجيل خروج</button>
+<button type="button" class="btn" onclick="window.logout()" style="background:#333;color:#fff">تسجيل خروج</button>
+<button type="button" class="btn" onclick="window.showPage('store')" style="background:#f5c518">ارجع للمتجر</button>
 </div>
 
-<div id="page-orders" class="card hidden">
-<h3>🧾 طلباتي</h3>
-<p id="ordersList" class="small">لسه مفيش طلبات</p>
-</div>
-
-<div id="page-wheel" class="card hidden">
-<h3>🎡 مسابقات - عجلة الحظ</h3>
-<p class="small">ارجع للمتجر والعب العجلة - 3 لفات بس كل يوم بعد الشراء</p>
-<button class="btn" onclick="showPage('store')" style="background:#f5c518">ارجع للمتجر</button>
-</div>
-
-<div id="page-cart" class="card hidden">
-<h3>🛒 السلة</h3>
-<p class="small">اختار باقة ودوس اشتري وادفع</p>
-</div>
+<div id="page-orders" class="card hidden"><h3>🧾 طلباتي</h3><p id="ordersList" class="small">لسه مفيش طلبات</p><button type="button" class="btn" onclick="window.showPage('store')" style="background:#f5c518">ارجع للمتجر</button></div>
+<div id="page-wheel" class="card hidden"><h3>🎡 مسابقات - عجلة الحظ</h3><p class="small">ارجع للمتجر والعب العجلة - 3 لفات بس كل يوم بعد الشراء</p><button type="button" class="btn" onclick="window.showPage('store')" style="background:#f5c518">ارجع للمتجر</button></div>
+<div id="page-cart" class="card hidden"><h3>🛒 السلة</h3><p class="small">اختار باقة ودوس اشتري وادفع</p><button type="button" class="btn" onclick="window.showPage('store')" style="background:#f5c518">ارجع للمتجر</button></div>
 
 <div id="payModal" class="modal hidden">
 <div class="modal-box">
-<div style="display:flex;justify-content:space-between;align-items:center"><b id="modalTitle">ادفع ازاي؟</b><button onclick="closePay()" style="background:none;border:0;color:#fff;font-size:20px">✕</button></div>
+<div style="display:flex;justify-content:space-between;align-items:center"><b id="modalTitle">ادفع ازاي؟</b><button type="button" onclick="window.closePay()" style="background:none;border:0;color:#fff;font-size:20px">✕</button></div>
 <p class="small" id="modalDesc"></p>
 <div class="pay-opt">
-<button onclick="openVodafone()" style="background:#E60000;color:#fff">🔴<br>فودافون كاش<br><small>افتح التطبيق</small></button>
-<button onclick="openOrange()" style="background:#FF7900;color:#fff">🟠<br>أورانج كاش<br><small>افتح التطبيق</small></button>
-<button onclick="openInstaPay()" style="background:#fff;color:#111">💜<br>انستا باي<br><small>افتح التطبيق</small></button>
+<button type="button" onclick="window.openVodafone()" style="background:#E60000;color:#fff">🔴<br>فودافون كاش<br><small>افتح التطبيق</small></button>
+<button type="button" onclick="window.openOrange()" style="background:#FF7900;color:#fff">🟠<br>أورانج كاش<br><small>افتح التطبيق</small></button>
+<button type="button" onclick="window.openInstaPay()" style="background:#fff;color:#111">💜<br>انستا باي<br><small>افتح التطبيق</small></button>
 </div>
-<button class="btn" onclick="confirmPay()" style="background:#25D366;color:#fff">✅ حولت - أكد على واتساب 📲</button>
-<p class="small">هيفتح تطبيق التحويل بتاع خطك على قايمة التحويل على طول<br>الرقم: <b style="color:#f5c518">01208398454</b></p>
+<button type="button" class="btn" onclick="window.confirmPay()" style="background:#25D366;color:#fff">✅ حولت - أكد على واتساب 📲</button>
+<p class="small">الرقم: <b style="color:#f5c518">01208398454</b></p>
 </div>
 </div>
 
 <div class="bottom">
-<button class="active" onclick="showPage('store',this)"> <i>🏠</i> الرئيسية </button>
-<button onclick="showPage('wheel',this)"> <i>🎁</i> العروض </button>
-<button onclick="showPage('wheel',this)"> <i>🎡</i> الهدايا </button>
-<button onclick="showPage('account',this)"> <i>👤</i> الحساب </button>
+<button type="button" class="active" onclick="window.showPage('store',this)"> <i>🏠</i> الرئيسية </button>
+<button type="button" onclick="window.showPage('wheel',this)"> <i>🎁</i> العروض </button>
+<button type="button" onclick="window.showPage('wheel',this)"> <i>🎡</i> الهدايا </button>
+<button type="button" onclick="window.showPage('account',this)"> <i>👤</i> الحساب </button>
 </div>
 
 <script>
-let userPhone = localStorage.getItem("hamo_phone")||"";
-let userPubgId = localStorage.getItem("hamo_pubg_id")||"";
-let userPlayerName = localStorage.getItem("hamo_player_name")||"";
-const MAX_SPINS = 3;
-const SELL_NUMBER = "01208398454";
-const baseItems=[
-{uc:60,price:55.59},
-{uc:325,price:280.21},
-{uc:660,price:561.00},
-{uc:1800,price:1525.38},
-{uc:3850,price:2837.79},
-{uc:8100,price:6103.38},
-];
-let selected=null;
-let allPrizes=JSON.parse(localStorage.getItem("hamo_wheel_prizes")||"[]");
-let isSpinning=false;
-function getActiveBonus(){
- let discount=0, extraUC=0;
- allPrizes.forEach(p=>{
-  if(p.includes("خصم 2%")) discount=Math.max(discount,2);
-  if(p.includes("خصم 1%")) discount=Math.max(discount,1);
-  if(p.includes("3 شدات")) extraUC+=3;
-  if(p.includes("2 شدة")) extraUC+=2;
-  if(p.includes("1 شدة")) extraUC+=1;
- });
- return {discount, extraUC};
-}
-// تحديث البطاقات الثابتة - من غير ما نمسحها
-function updateCards(){
- let b=getActiveBonus();
- document.querySelectorAll("#grid .card2").forEach((card)=>{
-  let i=parseInt(card.dataset.index);
-  let item=baseItems[i];
-  let finalPrice=item.price*(1-b.discount/100);
-  let finalUC=item.uc+b.extraUC;
-  card.querySelector(".uc-text").innerText=finalUC+" شدة";
-  card.querySelector(".price").innerText="EGP "+finalPrice.toFixed(2);
-  card.querySelector(".after").innerText=(b.discount>0||b.extraUC>0)?`✅ بعد مكسب العجلة: +${b.extraUC} شدة${b.discount>0?` - خصم ${b.discount}%`:``}`:"";
- });
- let box=document.getElementById("activePrizeBox");
- if(b.discount>0||b.extraUC>0){
-  box.innerHTML=`<div class="prize-active">✅ مكسب العجلة متفعل على كل البطاقات: ${b.discount>0?` خصم ${b.discount}% `:``} ${b.extraUC>0?` + ${b.extraUC} شدة `:``}</div>`;
- } else { box.innerHTML=""; }
- // زرار الدخول يتغير لو مسجل
- let lb=document.getElementById("loginBtn");
- if(userPhone){lb.innerText="👤 "+userPubgId+" ✅";lb.style.background="#25D366";}
-}
-updateCards();
-function showPage(p,btn){
- ["store","account","orders","wheel","cart"].forEach(x=>document.getElementById("page-"+x).classList.add("hidden"));
- document.getElementById("page-"+p).classList.remove("hidden");
- if(btn){document.querySelectorAll(".bottom button").forEach(b=>b.classList.remove("active"));btn.classList.add("active");}
- if(p=="orders"){let o=JSON.parse(localStorage.getItem("hamo_orders")||"[]");document.getElementById("ordersList").innerHTML=o.length?o.map(x=>"• "+x).join("<br>"):"لسه مفيش طلبات";}
- if(p=="account"){document.getElementById("accInfo").innerHTML=userPhone?`📱 ${userPhone}<br>🎮 ID: ${userPubgId}<br>👤 ${userPlayerName||""}`:"لسه مسجلتش - سجل فوق";}
- window.scrollTo({top:0});
-}
-function filterCat(c,btn){
- document.querySelectorAll(".cats button").forEach(b=>b.classList.remove("active"));btn.classList.add("active");
- showPage("store");
-}
-function doSearch(){
- let q=document.getElementById("searchInput").value.trim();
- document.querySelectorAll("#grid .card2").forEach(card=>{
-  card.style.display = !q || card.dataset.name.includes(q) ? "block" : "none";
- });
-}
-function registerNow(){
+// حماية: لو localStorage مش شغال، الموقع يفضل شغال
+function getLS(k){try{return localStorage.getItem(k)||""}catch(e){return ""}}
+function setLS(k,v){try{localStorage.setItem(k,v)}catch(e){}}
+let userPhone=getLS("hamo_phone"), userPubgId=getLS("hamo_pubg_id"), userPlayerName=getLS("hamo_player_name");
+const MAX_SPINS=3, SELL_NUMBER="01208398454";
+const baseItems=[{uc:60,price:55.59},{uc:325,price:280.21},{uc:660,price:561.00},{uc:1800,price:1525.38},{uc:3850,price:2837.79},{uc:8100,price:6103.38}];
+let selected=null, isSpinning=false;
+let allPrizes=[]; try{allPrizes=JSON.parse(getLS("hamo_wheel_prizes")||"[]")}catch(e){allPrizes=[]}
+
+function getActiveBonus(){let d=0,e=0;allPrizes.forEach(p=>{if(p.indexOf("خصم 2%")>-1)d=Math.max(d,2);if(p.indexOf("خصم 1%")>-1)d=Math.max(d,1);if(p.indexOf("3 شدات")>-1)e+=3;if(p.indexOf("2 شدة")>-1)e+=2;if(p.indexOf("1 شدة")>-1)e+=1});return {discount:d,extraUC:e}}
+
+function updateCards(){try{let b=getActiveBonus();document.querySelectorAll("#grid .card2").forEach(card=>{let i=parseInt(card.getAttribute("data-index"));let item=baseItems[i];if(!item)return;let fp=item.price*(1-b.discount/100);let fu=item.uc+b.extraUC;card.querySelector(".uc-text").innerText=fu+" شدة";card.querySelector(".price").innerText="EGP "+fp.toFixed(2);card.querySelector(".after").innerText=(b.discount>0||b.extraUC>0)?"✅ بعد مكسب العجلة: +"+b.extraUC+" شدة"+(b.discount>0?" - خصم "+b.discount+"%":""):""});let box=document.getElementById("activePrizeBox");if(box){box.innerHTML=(b.discount>0||b.extraUC>0)?'<div class="prize-active">✅ مكسب العجلة متفعل على كل البطاقات</div>':""}}catch(e){}}
+
+window.showPage=function(p,btn){
+ try{
+  ["store","account","orders","wheel","cart"].forEach(x=>{let el=document.getElementById("page-"+x);if(el)el.classList.add("hidden")});
+  let target=document.getElementById("page-"+p);if(target)target.classList.remove("hidden");
+  if(btn){document.querySelectorAll(".bottom button").forEach(b=>b.classList.remove("active"));btn.classList.add("active")}
+  if(p=="orders"){let o=[];try{o=JSON.parse(getLS("hamo_orders")||"[]")}catch(e){}document.getElementById("ordersList").innerHTML=o.length?o.map(x=>"• "+x).join("<br>"):"لسه مفيش طلبات"}
+  if(p=="account"){document.getElementById("accInfo").innerHTML=userPhone?("📱 "+userPhone+"<br>🎮 ID: "+userPubgId):"لسه مسجلتش - سجل فوق"}
+  window.scrollTo({top:0,behavior:"smooth"});
+ }catch(e){alert("في مشكلة في التنقل، جرب ريفريش")}
+};
+window.filterCat=function(btn){document.querySelectorAll(".cats button").forEach(b=>b.classList.remove("active"));if(btn)btn.classList.add("active");window.showPage("store")};
+window.doSearch=function(){let q=document.getElementById("searchInput").value.trim();document.querySelectorAll("#grid .card2").forEach(card=>{card.style.display=!q||card.getAttribute("data-name").indexOf(q)>-1?"block":"none"})};
+window.registerNow=function(){
  let phone=document.getElementById("phoneNum").value.trim();
  let id=document.getElementById("pubgIdLogin").value.trim();
  let name=document.getElementById("playerNameLogin").value.trim();
- if(phone.length<10){alert("اكتب رقمك صح");return;}
- if(!id){alert("اكتب ID ببجي");return;}
+ if(phone.length<10){alert("اكتب رقمك صح");return}
+ if(!id){alert("اكتب ID ببجي");return}
  userPhone=phone;userPubgId=id;userPlayerName=name;
- localStorage.setItem("hamo_phone",phone);localStorage.setItem("hamo_pubg_id",id);localStorage.setItem("hamo_player_name",name);
+ setLS("hamo_phone",phone);setLS("hamo_pubg_id",id);setLS("hamo_player_name",name);
  document.getElementById("pubgId").value=id;document.getElementById("playerName").value=name;
- updateCards();
- alert("تم التسجيل ✅"); showPage("store");
-}
-function logout(){localStorage.clear();location.reload();}
-function buyPkg(i){
- let id=document.getElementById("pubgId").value.trim()||userPubgId;
- if(!id){alert("اكتب ID ببجي الأول في بيانات الشحن تحت");document.getElementById("pubgId").focus();return;}
- let b=getActiveBonus();
- let item=baseItems[i];
- selected={uc:item.uc,basePrice:item.price,finalPrice:item.price*(1-b.discount/100),finalUC:item.uc+b.extraUC,discount:b.discount,extraUC:b.extraUC};
- document.getElementById("modalTitle").innerText=`${selected.finalUC} شدة - EGP ${selected.finalPrice.toFixed(2)}`;
- document.getElementById("modalDesc").innerText=`اختار هتحول من انهي خط؟ هيفتح تطبيق التحويل على قايمة التحويل على طول`;
+ alert("تم التسجيل ✅");window.showPage("store");
+};
+window.logout=function(){try{localStorage.clear()}catch(e){}location.reload()};
+window.buyPkg=function(i){
+ let idEl=document.getElementById("pubgId");
+ let id=(idEl?idEl.value.trim():"")||userPubgId;
+ if(!id){alert("اكتب ID ببجي الأول في بيانات الشحن تحت");if(idEl)idEl.focus();return}
+ let b=getActiveBonus();let item=baseItems[i];
+ selected={uc:item.uc,finalPrice:item.price*(1-b.discount/100),finalUC:item.uc+b.extraUC,discount:b.discount,extraUC:b.extraUC};
+ document.getElementById("modalTitle").innerText=selected.finalUC+" شدة - EGP "+selected.finalPrice.toFixed(2);
+ document.getElementById("modalDesc").innerText="اختار هتحول من انهي خط؟ هيفتح تطبيق التحويل على قايمة التحويل على طول";
  document.getElementById("payModal").classList.remove("hidden");
-}
-function closePay(){document.getElementById("payModal").classList.add("hidden");}
-function openVodafone(){
- let amount=Math.round(selected.finalPrice);
- window.location.href="intent://com.vodafone.cash#Intent;scheme=vodafone;package=com.vodafone.cash;end";
- setTimeout(()=>{window.location.href=`tel:*9*7*${SELL_NUMBER}*${amount}%23`;},800);
-}
-function openOrange(){
- let amount=Math.round(selected.finalPrice);
- window.location.href="intent://com.orange.cash#Intent;scheme=orange;package=com.orange.cash;end";
- setTimeout(()=>{window.location.href=`tel:*115*1*${SELL_NUMBER}*${amount}%23`;},800);
-}
-function openInstaPay(){
- window.location.href="intent://instapay#Intent;scheme=instapay;package=eg.com.instapay;end";
- setTimeout(()=>{window.location.href="https://ipn.eg/";},800);
-}
-function confirmPay(){
- if(!selected) return;
+};
+window.closePay=function(){document.getElementById("payModal").classList.add("hidden")};
+window.openVodafone=function(){let a=Math.round(selected.finalPrice);window.location.href="intent://com.vodafone.cash#Intent;scheme=vodafone;package=com.vodafone.cash;end";setTimeout(()=>{window.location.href="tel:*9*7*"+SELL_NUMBER+"*"+a+"%23"},800)};
+window.openOrange=function(){let a=Math.round(selected.finalPrice);window.location.href="intent://com.orange.cash#Intent;scheme=orange;package=com.orange.cash;end";setTimeout(()=>{window.location.href="tel:*115*1*"+SELL_NUMBER+"*"+a+"%23"},800)};
+window.openInstaPay=function(){window.location.href="intent://instapay#Intent;scheme=instapay;package=eg.com.instapay;end";setTimeout(()=>{window.location.href="https://ipn.eg/"},800)};
+window.confirmPay=function(){
+ if(!selected)return;
  let id=document.getElementById("pubgId").value.trim()||userPubgId;
  let pname=document.getElementById("playerName").value.trim()||userPlayerName;
  let pay=document.getElementById("payMethod").value;
- localStorage.setItem("hamo_pubg_id",id);
- localStorage.setItem("hamo_player_name",pname);
- localStorage.setItem("hamo_bought","yes");
- localStorage.setItem("hamo_unlocked","yes");
+ setLS("hamo_pubg_id",id);setLS("hamo_player_name",pname);setLS("hamo_bought","yes");setLS("hamo_unlocked","yes");
  updateWheelUI();
- let o=JSON.parse(localStorage.getItem("hamo_orders")||"[]");
- o.push(`${selected.finalUC} شدة - EGP ${selected.finalPrice.toFixed(2)} - ${new Date().toLocaleDateString("ar-EG")}`);
- localStorage.setItem("hamo_orders",JSON.stringify(o));
- let msg=`أهلا HAMO 🔥%0Aرقمي: ${userPhone}%0AID ببجي: ${id}%0Aالاسم: ${pname||"-"}%0Aعايز: ${selected.uc} شدة%0A${selected.extraUC>0?`هدية العجلة: + ${selected.extraUC} شدة%0A`:""}${selected.discount>0?`خصم العجلة متفعل: ${selected.discount}% %0A`:""}الإجمالي: ${selected.finalUC} شدة%0Aالسعر: EGP ${selected.finalPrice.toFixed(2)}%0A${pay}%0Aحولت على: 01208398454`;
+ let o=[];try{o=JSON.parse(getLS("hamo_orders")||"[]")}catch(e){}
+ o.push(selected.finalUC+" شدة - EGP "+selected.finalPrice.toFixed(2));
+ setLS("hamo_orders",JSON.stringify(o));
+ let msg="أهلا HAMO 🔥%0AID ببجي: "+id+"%0Aالاسم: "+(pname||"-")+"%0Aالإجمالي: "+selected.finalUC+" شدة%0Aالسعر: EGP "+selected.finalPrice.toFixed(2)+"%0A"+pay+"%0Aحولت على: 01208398454";
  window.open("https://wa.me/201103160633?text="+msg,"_blank");
- closePay();
- alert("✅ تم فتح عجلة الحظ ليك! ليك 3 لفات النهارده 🎡");
-}
+ window.closePay();alert("✅ تم فتح عجلة الحظ ليك! ليك 3 لفات النهارده 🎡");
+};
 const prizes=["3 شدات 🔥","خصم 2% 🎁","1 شدة ✨","حظ أوفر 😅","2 شدة 💎","خصم 1% 🎁","حظ أوفر 😅","3 شدات 🔥"];
-function todayKey(){let d=new Date();return d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate();}
-function getCount(){return parseInt(localStorage.getItem("hamo_spin_"+todayKey())||"0");}
-function isUnlocked(){return localStorage.getItem("hamo_bought")==="yes" || localStorage.getItem("hamo_unlocked")==="yes";}
+function todayKey(){let d=new Date();return d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate()}
+function getCount(){return parseInt(getLS("hamo_spin_"+todayKey())||"0")}
+function isUnlocked(){return getLS("hamo_bought")==="yes"||getLS("hamo_unlocked")==="yes"}
 function updateWheelUI(){
- let lockBox=document.getElementById("wheelLockBox");
- let playBox=document.getElementById("wh
+ let lockBox=document.getElementById("wheelLockBox"),playBox=document.getElementById("wheelPlayBox");
+ if(!lockBox||!playBox)return;
+ if(!isUnlocked()){lockBox.classList.remove("hidden");playBox.classList.add("hidden");return}
+ lockBox.classList.add("hidden");playBox.classList.remove("hidden");
+ let used=getCount(),left=MAX_SPINS-used;
+ document.getElementById("spinLeft").innerText="فاضلك: "+left+" لفات";
+ document.getElementById("spinUsed").innerText="لعبت "+used+" من 3 النهارده";
+ let btn=document.getElement
